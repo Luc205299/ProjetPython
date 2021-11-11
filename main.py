@@ -13,4 +13,12 @@ match Genre:
     case 3 :
         Genre = "Non Précisé"
 
+# age : en dessous de 18 ans , 18-25 ans  et + de 25 ans
 Age = int(input("Rentrer votre âge : "))
+match Age:
+    case mineur if Age < 18:
+        print("Vous avez en dessous de 18 ans.")
+    case entre2 if Age >= 18 and Age <= 25 :
+        print("Vous avez entre 18 et 25 ans.")
+    case mineur if Age > 25 :
+        print("Vous avez au dessus de 25 ans")
