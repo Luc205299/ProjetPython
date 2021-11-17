@@ -29,7 +29,6 @@ def Profil(folder) :
         readers.write(str(Age)+" ,")
         Style = int(input("Rentrer 1 si vous aimer la Science-fiction,\nRentrer 2 si vous aimer la Biographie,\nRentrer 3 si vous aimer l'Horreur,\nRentrer 4 si vous aimer la Romance,\nRentrer 5 si vous aimer les Fables,\nRentrer 6 si vous aimer l'Histoire,\nRentrer 7 si vous aimer la Comédie : "))
         readers.write(str(Style)+"\n")
-    readers.close
 
 #Connection a son compte
 def Connection(folder,name):
@@ -43,7 +42,6 @@ def Connection(folder,name):
                 else:
                     line=readers.readline()
         print("bonjour ",name)
-    readers.close
 
 #recherche du profil d'un utilisateur
 def DisplayUsers(folder, name):
@@ -56,7 +54,6 @@ def DisplayUsers(folder, name):
                     verification = True
                 else:
                     line = readers.readline()
-    readers.close
     return(print(line))
 
 

@@ -1,4 +1,4 @@
-from function import*
+from functionUsers import*
 
 #on demande si il veut se creer un profil, se connecter, rechercher un utilisateur ou quitter
 create=int(input("voulez vous vous connectez ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n 3 pour rechercher un utilisateur;\n 4 pour quitter : "))
