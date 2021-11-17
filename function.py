@@ -1,8 +1,6 @@
+# Création du Profil
 def Profil(folder) :
     with open (folder,"a") as readers:
-
-    #Création du Profil
-
         Pseudo=str(input("Rentrer votre Pseudonyme : "))
         readers.write(Pseudo+" ,")
         Genre=0
@@ -15,8 +13,6 @@ def Profil(folder) :
                     Genre = 2
                 case 3 :
                     Genre = 3
-
-
         readers.write(str(Genre)+" ,")
         # age : en dessous de 18 ans , 18-25 ans  et + de 25 ans
         Age = int(input("Rentrer votre âge : "))
@@ -33,10 +29,9 @@ def Profil(folder) :
         readers.write(str(Age)+" ,")
         Style = int(input("Rentrer 1 si vous aimer la Science-fiction,\nRentrer 2 si vous aimer la Biographie,\nRentrer 3 si vous aimer l'Horreur,\nRentrer 4 si vous aimer la Romance,\nRentrer 5 si vous aimer les Fables,\nRentrer 6 si vous aimer l'Histoire,\nRentrer 7 si vous aimer la Comédie : "))
         readers.write(str(Style)+"\n")
-
     readers.close
 
-
+#Connection a son compte
 def Connection(folder,name):
     with open(folder,"r") as readers:
         verification=False
@@ -50,6 +45,7 @@ def Connection(folder,name):
         print("bonjour ",name)
     readers.close
 
+#recherche du profil d'un utilisateur
 def DisplayUsers(folder, name):
     with open(folder, "r") as readers:
         verification = False
