@@ -51,18 +51,18 @@ def changeTitle(file:str):
         # read open file
         content = f.readlines()
         for ligne in content:
-            print(ligne," et ", name)
+            #print(ligne," et ", name)
             data_list.append(ligne)
             if str(ligne) == name:
 
                 index_src = content.index(ligne)
-                print(index_src, "index src")
+                #print(index_src, "index src")
 
     if index_src == None :
         return(print("Ce livre n'est pas dans la base donnée"))
 
     elif type(index_src) == int:
-        print("verif ", data_list[index_src])
+        #print("verif ", data_list[index_src])
         #2nd open of the file to modify data
         new_title = str(input("Quel est le nouveau titre de ce livre?"))
         data_list[index_src] = new_title
@@ -76,19 +76,30 @@ def delete_Book(file:str):
     """ delete an existing book from the repository/library of file in argument
     file: str the file in question """
 
-    name = str(input("Entrez le titre du livre à supprimer :"))
-    exist = False
+    name = str(input("Entrez le titre du livre à suuprimmer :"))
+    index_src = None
+    #list of file data
+    data_list=[]
     # open file in read mode
-    with open(file, "r") as f:
-        # read file
+    with open(file, "r", encoding='utf-8') as f:
+        # read open file
         content = f.readlines()
         for ligne in content:
-            print(str(ligne)," et ", name)
+            #print(ligne," et ", name)
+            data_list.append(ligne)
             if str(ligne) == name:
-                exist = True
-                print("Le livre a été trouvé")
-                f.write(str(input("Entrez le nouveau nom")))
 
-        if exist==False:
-            print("Ce livre n'est pas dans la base donnée")
-    pass
+                index_src = content.index(ligne)
+                print(index_src, "index src")
+
+    if index_src == None :
+        return(print("Ce livre n'est pas dans la base donnée"))
+
+    elif type(index_src) == int:
+        #2nd open of the file to delete data
+        temp = data_list.pop(index_src)
+        print("verification poped:",temp)
+        with open(file, "w", encoding='utf-8') as f:
+            # write new data open file
+            for elt in data_list:
+                f.write(elt)
