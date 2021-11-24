@@ -15,6 +15,7 @@ match Interface:
         namelook = str(input("veuillez rentrer le Speudo de la personne que vous cherchez : "))
         DisplayUsers("readers.txt", namelook)
     case 4:
-        exit()
+        name_del = str(input("veuillez rentrer votre Speudo : "))
+        DeleteUsers("readers.txt",name_del)
 
 

@@ -1,6 +1,6 @@
 # Création du Profil
-def Profil(folder) :
-    with open (folder,"a") as readers:
+def Profil(file) :
+    with open (file,"a") as readers:
         Pseudo=str(input("Rentrer votre Pseudonyme : "))
         readers.write(Pseudo+" ,")
         Genre=0
@@ -31,8 +31,8 @@ def Profil(folder) :
         readers.write(str(Style)+"\n")
 
 #Connection a son compte
-def Connection(folder,name):
-    with open(folder,"r") as readers:
+def Connection(file,name):
+    with open(file,"r") as readers:
         verification=False
         while verification==False:
             line = readers.readline()
@@ -44,8 +44,8 @@ def Connection(folder,name):
         print("bonjour ",name)
 
 #recherche du profil d'un utilisateur
-def DisplayUsers(folder, name):
-    with open(folder, "r") as readers:
+def DisplayUsers(file, name):
+    with open(file, "r") as readers:
         verification = False
         while verification == False:
             line = readers.readline()
@@ -55,3 +55,11 @@ def DisplayUsers(folder, name):
                 else:
                     line = readers.readline()
     return(print(line))
+
+def DeleteUsers(file,name):
+    with open(file,"r") as f:
+        lines=f.readlines()
+    with open(file,"w")as f:
+        for line in lines:
+            if name not in line.strip("/n"):
+                f.write(line)
