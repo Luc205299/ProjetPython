@@ -2,12 +2,12 @@
 
 @author: Buhard
 """
-def ShowBook(folder:str):
-    """function to open and read the Books folder and print what's inside
-    folder: the folder un want to read (.txt)"""
-    #open folder in read mode
-    with open(folder, "r") as f:
-        # read open folder
+def ShowBook(file:str):
+    """function to open and read the Books file and print what's inside
+    file: the file un want to read (.txt)"""
+    #open file in read mode
+    with open(file, "r") as f:
+        # read open file
         content = f.readlines()
     cpt=1
     for ligne in content:
@@ -15,15 +15,15 @@ def ShowBook(folder:str):
         cpt+=1
     return()
 
-def addBook(folder:str):
-    """function to add a book to the folder at the end
-    folder: the folder un want to read (.txt)
+def addBook(file:str):
+    """function to add a book at the end of the file
+    file: the file un want to read (.txt)
     name: the name of the book you want to append"""
     name=str(input("Entrez le titre du livre à ajouter : "))
     exist = False
-    #open folder in read mode
-    with open(folder, "r", encoding='utf-8') as f:
-    # read open folder
+    #open file in read mode
+    with open(file, "r", encoding='utf-8') as f:
+    # read open file
         content = f.readlines()
         for ligne in content:
             ligne2 = ligne.strip('\n')
@@ -33,27 +33,62 @@ def addBook(folder:str):
                 exist=True
 
     if exist == False:
-        j = open(folder,"a", encoding='utf-8')
+        j = open(file,"a", encoding='utf-8')
         j.write(name)
         j.close()
 
-def changeTitle(folder:str):
-    """function to modify an existing book in folder
-    folder: the folder un want to read (.txt)
+def changeTitle(file:str):
+    """function to modify an existing book in file
+    file: the file un want to read (.txt)
     name: the name of the book you want to modify"""
-    #global addBook()
 
     name = str(input("Entrez le titre du livre à modifier :"))
-    verif=False
-    # open folder in read mode
-    with open(folder, "r") as f:
-        # read open folder
+    index_src = None
+    #list of file data
+    data_list=[]
+    # open file in read mode
+    with open(file, "r", encoding='utf-8') as f:
+        # read open file
+        content = f.readlines()
+        for ligne in content:
+            print(ligne," et ", name)
+            data_list.append(ligne)
+            if str(ligne) == name:
+
+                index_src = content.index(ligne)
+                print(index_src, "index src")
+
+    if index_src == None :
+        return(print("Ce livre n'est pas dans la base donnée"))
+
+    elif type(index_src) == int:
+        print("verif ", data_list[index_src])
+        #2nd open of the file to modify data
+        new_title = str(input("Quel est le nouveau titre de ce livre?"))
+        data_list[index_src] = new_title
+        with open(file, "w", encoding='utf-8') as f:
+            # write new data open file
+            for elt in data_list:
+                f.write(elt)
+
+
+def delete_Book(file:str):
+    """ delete an existing book from the repository/library of file in argument
+    file: str the file in question """
+
+    name = str(input("Entrez le titre du livre à supprimer :"))
+    exist = False
+    # open file in read mode
+    with open(file, "r") as f:
+        # read file
         content = f.readlines()
         for ligne in content:
             print(str(ligne)," et ", name)
             if str(ligne) == name:
-                verif=True
+                exist = True
+                print("Le livre a été trouvé")
                 f.write(str(input("Entrez le nouveau nom")))
 
-        if verif==False:
+        if exist==False:
             print("Ce livre n'est pas dans la base donnée")
+    pass

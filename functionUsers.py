@@ -55,5 +55,3 @@ def DisplayUsers(folder, name):
                 else:
                     line = readers.readline()
     return(print(line))
-
-
