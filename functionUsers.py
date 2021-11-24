@@ -45,6 +45,7 @@ def Connection(folder,name):
 
 #recherche du profil d'un utilisateur
 def DisplayUsers(folder, name):
+    """commentaire qui explique la fonction"""
     with open(folder, "r") as readers:
         verification = False
         while verification == False:
@@ -55,3 +56,5 @@ def DisplayUsers(folder, name):
                 else:
                     line = readers.readline()
     return(print(line))
+
+if name == line[0]
