@@ -2,7 +2,7 @@ from functionUsers import*
 from function import*
 
 #on demande si il veut se creer un profil, se connecter, rechercher un utilisateur ou quitter
-Interface=int(input("voulez vous vous connectez ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n 3 pour rechercher un utilisateur;\n 4 pour quitter : "))
+Interface=int(input("voulez vous vous connectez ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n 3 pour rechercher un utilisateur;\n 4 pour supprimer votre compte;\n 5 pour quitter : "))
 while Interface > 4 or Interface < 1:
     Interface=int(input("voulez vous vous connectez ? ( 1 pour créer un profil et 2 pour poursuivre a la connection : "))
 match Interface:
@@ -15,7 +15,8 @@ match Interface:
         namelook = str(input("veuillez rentrer le Speudo de la personne que vous cherchez : "))
         DisplayUsers("readers.txt", namelook)
     case 4:
-        name_del = str(input("veuillez rentrer votre Speudo : "))
+        name_del = str(input("veuillez rentrer  : "))
         DeleteUsers("readers.txt",name_del)
-
+    case 5:
+        exit()
 
