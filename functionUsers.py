@@ -44,7 +44,7 @@ def Connection(file,name):
         print("bonjour ",name)
 
 #recherche du profil d'un utilisateur
-def DisplayUsers(file, name):
+def DisplayUsers(file,file2, name):
     with open(file, "r") as readers:
         verification = False
         while verification == False:
