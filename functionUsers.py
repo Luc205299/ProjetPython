@@ -63,3 +63,7 @@ def DeleteUsers(file,name):
         for line in lines:
             if name not in line.strip("/n"):
                 f.write(line)
+
+
+
+
