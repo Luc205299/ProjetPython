@@ -61,7 +61,7 @@ def DeleteUsers(file,name):
         lines=f.readlines()
     with open(file,"w")as f:
         for line in lines:
-            if name not in line.strip("/n"):
+            if name not in line.strip("\n"):
                 f.write(line)
 
 

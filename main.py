@@ -28,4 +28,5 @@ from FunctionMatrix import*
 #     case 4:
 #         IniMatrix("readers.txt", "Books.txt")
 #         exit()
-delete_Book("Books.txt","booksread.txt")
+#delete_Book("Books.txt","booksread.txt")
+init_Matrix("Books.txt","readers.txt")

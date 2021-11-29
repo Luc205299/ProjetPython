@@ -1,23 +1,22 @@
-def IniMatrix(file1,file2):
-    Matrix=[]
-    with open(file1, "r") as readers:
-        cpt1=0
-        line = readers.readline()
-        while line != "":
-            cpt1+=1
-            line = readers.readline()
-    with open(file2, "r") as books:
-        cpt2=0
-        line = books.readline()
-        while line != "" :
-            cpt2+=1
-            line = books.readline()
-        print(cpt1,cpt2)
-    for line in range(cpt1):
-        L=[]
-        for rows in range(cpt2):
-            L.append(0)
-        Matrix.append(L)
-    return Matrix
+def init_Matrix(file1,file2):
+    """create a matrix with books as columns, persons as rows"""
+    Matrix = []
+    #append the book line as the line[0] in the matrix
+    with open(file1, "r", encoding='utf-8') as bks:
+        line = bks.readlines()
+        tmp = []
+        for elt in line:
+            tmp.append(elt.strip("\n"))
+        Matrix.append(tmp)
 
+    with open(file2, "r", encoding='utf-8') as readers:
+        line = readers.readlines()
+        for elt in line:
+            tmp = elt.split(',')
+            temp_list = [i-i for i in range(len(Matrix[0]))]
+            temp_list[0] = tmp[0]
+            Matrix.append(temp_list)
 
+    print("Matrice:")
+    for line in Matrix:
+       print(line)

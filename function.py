@@ -19,7 +19,7 @@ def addBook(file:str,name:str=None):
     """function to add a book at the end of the file
     file: the file un want to read (.txt)
     name: the name of the book you want to append"""
-    if name!None:
+    if name != None:
         name = str(input("Entrez le titre du livre à ajouter : "))
     exist = False
     #open file in read mode
