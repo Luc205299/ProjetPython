@@ -1,1 +1,2 @@
-skusku ,2,3,5,5
+skusku,1,18,17
+kirikou,1
