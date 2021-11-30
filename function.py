@@ -4,18 +4,19 @@
 """
 
 
-def ShowBook(file:str):
+def ShowBook(file: str):
     """function to open and read the Books file and print what's inside
     file: the file un want to read (.txt)"""
-    #open file in read mode
+    # open file in read mode
     with open(file, "r") as f:
         # read open file
         content = f.readlines()
-    cpt=1
+    cpt = 1
     for line in content:
-        print(cpt,":",str(line),'\n')
-        cpt+=1
-    return()
+        print(cpt, ":", str(line), '\n')
+        cpt += 1
+    return ()
+
 
 def book_exist(file1, name):
     """function to search if a book exist and return it number if it is true
@@ -29,7 +30,6 @@ def book_exist(file1, name):
         content = f.readlines()
         for ligne in content:
             ligne2 = ligne.strip('\n')
-            # print("ligne2 :", ligne, " and ", name, ("?"))
             if ligne2 == name:
                 exist = True
                 return content.index(ligne)
@@ -83,7 +83,7 @@ def changeTitle(file: str):
                 # print(index_src, "index src")
 
     if index_src == None:
-        return (print("Ce livre n'est pas dans la base donnée"))
+        return print("Ce livre n'est pas dans la base donnée")
 
     elif type(index_src) == int:
         # print("verif ", data_list[index_src])
@@ -117,11 +117,10 @@ def delete_Book(file: str, file2: str):
             else:
                 index_src = content.index(ligne) + 1  # attention au + 1 avc le décalage mais c possible que pb apres
                 print("verif finding", ligne, index_src)
-    # ajouter le pb des numéros qui vont se décaler lors de la supression
 
     # condition verification
     if index_src == None:
-        return (print("Ce livre n'est pas dans la base donnée"))
+        return print("Ce livre n'est pas dans la base donnée")
     elif index_src != None:
         # 2nd open of the file to delete data
         with open(file, "w", encoding='utf-8') as f:
@@ -146,11 +145,42 @@ def delete_Book(file: str, file2: str):
                         print("tmp apres pop", tmp)
                 data_list.append(tmp)
 
+        # ajouter le pb des numéros qui vont se décaler lors de la supression, supprimer de la matrice
+
         # with open(file2, "w", encoding='utf-8') as f2:
         #     # write new data open file
         #     for elt in data_list:
         #         data_list=[]
         #         f2.write(elt+'\n')
+
+
+def booksread_verify(file1, file2, reader, title):
+    """verify is a book as been read byth reader
+       file1: books
+       file2: booksread
+       reader, the currently logged user"""
+    # check if the title exist
+    test = book_exist(file1, title)
+    if test == False:
+        return f"Le livre : {title} n'existe pas, essayez de l'ajouter avant."
+    else:
+        position = test
+    # open file in read mode
+    with open(file2, "r", encoding='utf-8') as f:
+        # read open file
+        content = f.readlines()
+        for ligne in content:
+            l2 = ligne.strip('\n')
+            l2 = l2.split(',')
+            # verify if the book is already written
+            if l2[0] == reader:
+                # if found, stop the process with return function, from the second elt in list
+                for elt in l2[1:]:
+                    # may pose pb with the en dof line with \n
+                    if int(elt) == int(position):
+                        print("Vous avez bien lu ce livre")
+                        return True, position
+        return False
 
 
 def booksread_addBook(file1, file2, reader):
