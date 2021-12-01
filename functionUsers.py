@@ -1,8 +1,10 @@
 # Création du Profil
-def Profil(file) :
+def Profil(file,file2) :
     with open (file,"a") as readers:
-        Pseudo=str(input("Rentrer votre Pseudonyme : "))
-        readers.write(Pseudo+" ,")
+        with open(file2,"a") as br:
+            Pseudo=str(input("Rentrer votre Pseudonyme : "))
+            readers.write(Pseudo+" ,")
+            br.write(Pseudo+" ,\n")
         Genre=0
         while Genre <= 0 or Genre>4:
             Genre = int(input("Si vous êtes un Homme tapez 1 ; \nSi vous êtes une Femme tapez 2 ; \nSi vous souhaitez ne pas rentrer votre genre, tapez 3 : "))
@@ -56,13 +58,19 @@ def DisplayUsers(file,file2, name):
                     line = readers.readline()
     return(print(line))
 
-def DeleteUsers(file,name):
+def DeleteUsers(file,file2,name):
     with open(file,"r") as f:
-        lines=f.readlines()
+        with open(file2,"r") as b:
+            lines2=b.readlines()
+            lines=f.readlines()
     with open(file,"w")as f:
         for line in lines:
             if name not in line.strip("\n"):
                 f.write(line)
+    with open(file2, "w") as b:
+        for line2 in lines2:
+            if name not in line2.strip("\n"):
+                b.write(line2)
 
 
 
