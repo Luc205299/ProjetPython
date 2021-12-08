@@ -2,3 +2,6 @@ paul ,2 ,3 ,3
 jgig ,2 ,3 ,6
 max ,3 ,2 ,4
 sylvan ,1 ,1 ,1
+lucas ,3 ,2 ,5
+mathieu ,2 ,3 ,7
+jeez ,3 ,3 ,4

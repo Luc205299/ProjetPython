@@ -16,15 +16,6 @@ def init_Matrix(file1, file2):
             tmp.append(elt.strip("\n"))
         Matrix.append(tmp)
 
-    with open(file2, "r", encoding='utf-8') as readers:
-        line = readers.readlines()
-        for elt in line:
-            tmp = elt.split(',')
-            print(tmp)
-            temp_list = [i - i for i in range(len(Matrix[0])-1)]
-            temp_list[0] = tmp[0]
-            Matrix.append(temp_list)
-
     print("Matrice:")
     print(Matrix)
     print("Matrice:")
@@ -67,3 +58,9 @@ def update_Matrix(file1, file2, reader) -> list:
 
     # met a jour la matrice avec la nouvelle note
     return Matrix
+
+def save_matrix(file):
+    global Matrix
+    with open(file,"w") as f:
+        for i in range(len(Matrix)):
+            f.write(str(Matrix[i])+"\n")

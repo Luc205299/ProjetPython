@@ -1,15 +1,19 @@
 from functionUsers import *
 from function import *
 from FunctionMatrix import *
+
+init_Matrix("Books.txt", "readers.txt")
+
 # #on demande si il veut se creer un profil, se connecter, rechercher un utilisateur ou quitter
-Interface = int(input(
-    "voulez vous vous connectez ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n 3 pour rechercher un utilisateur;\n 4 pour quitter : "))
+Interface = int(
+    input("voulez vous vous connectez ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n 3 pour rechercher un utilisateur;\n 4 pour quitter : "))
 while Interface > 6 or Interface < 1:
     Interface = int(
         input("voulez vous vous connectez ? ( 1 pour créer un profil et 2 pour poursuivre a la connection : "))
 match Interface:
     case 1:
         Profil("readers.txt", "booksread.txt")
+        print(Matrix)
     case 2:
         name = str(input("veuillez rentrer votre Speudo : "))
         Connection("readers.txt", name)
@@ -18,6 +22,7 @@ match Interface:
             answer = str(input("etes vous sur de supprimer votre profil  ? : "))
         match answer:
             case 2:
+                print(verification_users("readers.txt", name))
                 exit()
             case 1:
                 DeleteUsers("readers.txt","booksread.txt", name)
@@ -32,7 +37,6 @@ match Interface:
     case 5:
         booksread_addBook("Books.txt", "booksread.txt", "skusku")
     case 6:
-        init_Matrix("Books.txt", "readers.txt")
         update_Matrix("Books.txt", "booksread.txt", "skusku ")
     case _:
         print("entrez une commande valide...")

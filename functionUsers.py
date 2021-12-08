@@ -1,10 +1,20 @@
-# Création du Profil
+from FunctionMatrix import*
+
+"""Fonction permettant de créer le profil de l'utilisateur avec le nom, le genre , l'age, et le style aimé par l'users !!!TRADUIRE EN ANGLAIS!!! """
 def Profil(file,file2) :
+    global Matrix
     with open (file,"a") as readers:
         with open(file2,"a") as br:
-            Pseudo=str(input("Rentrer votre Pseudonyme : "))
+            Pseudo=str(input("Enter your name : "))
+            """ Add the username to the file "readers.txt" """
             readers.write(Pseudo+" ,")
             br.write(Pseudo+" ,\n")
+            """ Add the username to the Matrix """
+            temp_list = [i - i for i in range(len(Matrix[0]) - 1)]
+            print(temp_list)
+            temp_list[0] = Pseudo
+            print(temp_list)
+            Matrix.append(temp_list)
         Genre=0
         while Genre <= 0 or Genre>4:
             Genre = int(input("Si vous êtes un Homme tapez 1 ; \nSi vous êtes une Femme tapez 2 ; \nSi vous souhaitez ne pas rentrer votre genre, tapez 3 : "))
@@ -72,6 +82,14 @@ def DeleteUsers(file,file2,name):
             if name not in line2.strip("\n"):
                 b.write(line2)
 
-
+def verification_users(file,name):
+    with open(file, "r") as f:
+        line=f.readline()
+        while line!= "":
+            if name in line:
+                return True
+            else:
+                line=f.readline()
+        return False
 
 
