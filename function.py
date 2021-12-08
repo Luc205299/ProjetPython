@@ -9,7 +9,7 @@ def ShowBook(file: str):
     """function to open and read the Books file and print what's inside
     file: the file un want to read (.txt)"""
     # open file in read mode
-    with open(file, "r") as f:
+    with open(file, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
     cpt = 1
@@ -93,6 +93,17 @@ def changeTitle(file: str):
             # write new data open file
             for elt in data_list:
                 f.write(elt)
+
+def saisir_livres(file1):
+    L=[]
+    stop = False
+    with open(file1,"a") as bookread:
+            while not stop:
+                read = int(input("saisissez le livre avez vous lus"))
+                bookread.write(","+str(read)+" ")
+                verification = str(input("Avez vous d'autre livres à Saisir ? ( yes / no) :"))
+                if verification == "no":
+                    stop = True
 
 
 def delete_Book(file: str, file2: str):
