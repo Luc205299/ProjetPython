@@ -96,8 +96,8 @@ def supress_Matrix(file1, file2, reader) -> list:
     # met a jour la matrice avec la nouvelle note
     return Matrix
 
-def save_matrix(file):
-    global Matrix
+def save_matrix(file, Matrix):
+    #global Matrix
     with open(file,"w") as f:
         for i in range(len(Matrix)):
             f.write(str(Matrix[i])+"\n")

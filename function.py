@@ -2,7 +2,9 @@
 
 @author: Buhard
 """
+import functionUsers
 from FunctionMatrix import *
+from functionUsers import *
 
 
 def ShowBook(file: str):
@@ -204,12 +206,15 @@ def booksread_verify(file1, file2, reader, title):
         return False
 
 
-def booksread_addBook(file1, file2, reader): #! ajouter la verif du profil existant ou pas
+def booksread_addBook(file,file1, file2, reader): #! ajouter la verif du profil existant ou pas
     """create a folder with each reader and the books he has readen
     file1: books
     file2: booksread
     reader, the currently logged user"""
-    # ask for the new book title
+    # verifiy is the user is connected
+    if functionUsers.users_exist(file,reader)==False:
+        return("erreur nom d'utilisateur, prière de vous connecter avec un identifiant valide")
+    # title of the book for identification
     title = str(input("Entrez le titre du nouveau livre que vous avez lu :"))
     test = book_exist(file1, title)
     if test == None:
@@ -224,7 +229,6 @@ def booksread_addBook(file1, file2, reader): #! ajouter la verif du profil exist
         # read open file
         content = f.readlines()
         for ligne in content:
-            #print("ligne=",ligne)
             l2 = ligne.strip('\n')
             l2 = l2.split(',')
             # verify if the book isn't already written

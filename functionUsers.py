@@ -50,7 +50,7 @@ def Connection(file,name):
             line = readers.readline()
             while line != "" and verification== False:
                 if name in line:
-                    verification=True
+                    verification = True
                 else:
                     line=readers.readline()
         print("bonjour ",name)
@@ -82,7 +82,8 @@ def DeleteUsers(file,file2,name):
             if name not in line2.strip("\n"):
                 b.write(line2)
 
-def verification_users(file,name):
+def users_exist(file,name):
+    """"file : reader.txt"""
     with open(file, "r") as f:
         line=f.readline()
         while line!= "":
