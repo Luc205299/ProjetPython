@@ -96,8 +96,35 @@ def supress_Matrix(file1, file2, reader) -> list:
     # met a jour la matrice avec la nouvelle note
     return Matrix
 
-def save_matrix(file, Matrix):
-    #global Matrix
-    with open(file,"w") as f:
+def save_matrix(file):
+    global Matrix
+    with open(file,"w", encoding='utf-8') as f:
         for i in range(len(Matrix)):
             f.write(str(Matrix[i])+"\n")
+
+def import_matrix(file):
+    global Matrix
+    Matrix = []
+    with open(file, "r", encoding='utf-8') as f:
+        line = f.readline()
+        L = []
+        while line != "":
+            a = line.strip("\n").strip(' [ ').strip(' ]')
+            a = list(map(str, a))
+            line = f.readline()
+            """A partir d'ici , pb quand c'est des caracteres """
+            for i in a:
+                """si les carracteres sont des str() MAJ et MIN """
+                if 91 > ord(i) > 64 or 123 > ord(i) > 96:
+                    L.append(i)
+                    """transforme sous le nom de results la liste en liste de str() 1 par 1 elmt"""
+                    results = [str(i) for i in L]
+                """si les carracteres sont des int()"""
+                if 58 > ord(i) > 48:
+                    L.append(i)
+                    """transforme sous le nom de results la liste en liste de int() 1 par 1 elmt"""
+                    results = [int(i) for i in L]
+            Matrix.append(results)
+
+            L = []
+    return Matrix

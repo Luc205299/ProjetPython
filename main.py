@@ -14,6 +14,7 @@ match Interface:
     case 1:
         Profil("readers.txt", "booksread.txt")
         print(Matrix)
+        save_matrix("Matrix.txt")
     case 2:
         name = str(input("veuillez rentrer votre Speudo : "))
         Connection("readers.txt", name)
