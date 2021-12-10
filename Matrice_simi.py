@@ -8,16 +8,18 @@ def init_matrixSimi(file):
     """file:readers.txt"""
     global Matrix, Matrix_simi
     # add every reader in the line and rows
+    tmp_list = ['0']
     for line in Matrix:
-        tmp_list = [0]
-        for elt in line:
-            # every name
-            tmp_list.append(elt)
-    Matrix.append(tmp_list)
+        #for elt in line:
+         # every name is append on the list
+         tmp_list.append(line[0])
+    #add names as the first line
+    Matrix_simi.append(tmp_list)
 
+    tmp_list = ['0']
     for i in range(len(Matrix) - 1):
-        # add every name as first in the matrix
-        tmp_list[0] = Matrix[0][i]
+        # add every name as first element in the matrix for each name, same row has line n°
+        Matrix_simi[i][0] = Matrix_simi[0][i]
         for j in range(len(Matrix) - 1):
             if i == j:
                 Matrix_simi[i][j] = 1
@@ -30,7 +32,7 @@ def init_matrixSimi(file):
                 print(res)
                 Matrix_simi[i][j] = res
 
-        tmp_list.append(tmp_list)
+        Matrix_simi.append(tmp_list)
     save_matrix(file, Matrix_simi)
 
 
