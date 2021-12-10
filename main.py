@@ -2,7 +2,7 @@ from functionUsers import *
 from function import *
 from FunctionMatrix import *
 
-init_Matrix("Books.txt", "readers.txt")
+init_Matrix("Books.txt", "Matrix.txt")
 
 # #on demande si il veut se creer un profil, se connecter, rechercher un utilisateur ou quitter
 Interface = int(

@@ -8,13 +8,22 @@ def init_Matrix(file1, file2):
     # import the global matrix
     global Matrix
     # append the book line as the line[0] in the matrix
+    with open(file2, "r", encoding='utf-8') as rds:
+
+        line = rds.readlines()
+        # useless case in top left corner, filled with a random value
+        # if the folder isn't already created
+        if len(line) == 0:
+            return 0
     with open(file1, "r", encoding='utf-8') as bks:
+
         line = bks.readlines()
         # useless case in top left corner, filled with a random value
         tmp = ["0"]
         for elt in line:
             tmp.append(elt.strip("\n"))
         Matrix.append(tmp)
+
 
     print("Matrice:")
     print(Matrix)
