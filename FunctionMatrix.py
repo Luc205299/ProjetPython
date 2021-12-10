@@ -100,31 +100,31 @@ def save_matrix(file):
     global Matrix
     with open(file,"w", encoding='utf-8') as f:
         for i in range(len(Matrix)):
-            f.write(str(Matrix[i])+"\n")
+            for j in range(len(Matrix[i])):
+                f.write(str(Matrix[i][j])+",")
+            f.write("\n")
 
 def import_matrix(file):
     global Matrix
     Matrix = []
     with open(file, "r", encoding='utf-8') as f:
-        line = f.readline()
-        L = []
-        while line != "":
-            a = line.strip("\n").strip(' [ ').strip(' ]')
-            a = list(map(str, a))
-            line = f.readline()
-            """A partir d'ici , pb quand c'est des caracteres """
-            for i in a:
-                """si les carracteres sont des str() MAJ et MIN """
-                if 91 > ord(i) > 64 or 123 > ord(i) > 96:
-                    L.append(i)
-                    """transforme sous le nom de results la liste en liste de str() 1 par 1 elmt"""
-                    results = [str(i) for i in L]
-                """si les carracteres sont des int()"""
-                if 58 > ord(i) > 48:
-                    L.append(i)
-                    """transforme sous le nom de results la liste en liste de int() 1 par 1 elmt"""
-                    results = [int(i) for i in L]
-            Matrix.append(results)
-
+        line = f.readlines()
+        # read the file
+        for i in range(len(line)):
             L = []
+            if i == 0 :
+                #tmp=[]
+                tmp = line[i].strip(',\n').split(",")
+                L=tmp
+            else:
+                a = line[i].strip(',\n').split(",")
+                for j in range(len(a)-1):
+                    #print("a =",a)
+                    if j==0:
+                        #ajouter le premier elty de la liste
+                        L.append(a[0])
+                    else:
+                        a = line[i].strip('\n').split(",")
+                        L.append(a[i])
+            Matrix.append(L)
     return Matrix

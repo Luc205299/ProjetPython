@@ -26,7 +26,7 @@ def import_matrix(file,m):
             a = list(map(str, a))
             for i in a:
 
-                if 58 > ord(i) > 48:
+                if 58 > ord(i) > 47:
                     print(i)
                     L.append(i)
                     results = [int(i) for i in L]
@@ -38,8 +38,8 @@ def import_matrix(file,m):
             print("PPPPPP    =", n)
     return n
 
-
-import_matrix(f"Matrix.txt",Matrix1)
+n=[]
+import_matrix(f"Matrix.txt",n)
 print(n)
 """P=[]
 with open("Matrix.txt","r") as f :
