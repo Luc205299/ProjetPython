@@ -13,9 +13,9 @@ def Profil(file, file2, Matrix):
             """cette partie ne fais pas attention aux doublets a refaire"""  # Add the username to the Matrix ne fais pas attention aux doublets
 
             print("Matrice est =", Matrix)
-            print("Matrix 0 =", Matrix[0], '\n', len(Matrix[0]))
-            temp_list = [i - i for i in range(len(Matrix[0]) - 1)]
-            print(temp_list)
+            print("Matrix 0 =", Matrix[0], '\n', "len(Matrix[0])",len(Matrix[0]))
+            temp_list = [i - i for i in range(len(Matrix[0]))]
+            print("len=", len(temp_list))
             temp_list[0] = Pseudo
             print(temp_list)
             print("len ", len(temp_list))

@@ -101,8 +101,12 @@ def update_Matrix(file1, file2, reader) -> list:
 def save_matrix(file, Matrix):
     #global Matrix
     with open(file, "w", encoding='utf-8') as f:
+        #print("Matrix",len(Matrix), '\n',Matrix)
         for i in range(len(Matrix)):
+
+            #print("i =",i)
             for j in range(len(Matrix[i])):
+               # print("j =",j)
                 f.write(str(Matrix[i][j]) + ",")
             f.write("\n")
 
@@ -121,7 +125,7 @@ def import_matrix(file):
                 L = tmp
             else:
                 a = line[i].strip(',\n').split(",")
-                for j in range(len(a)-1):
+                for j in range(len(a)):
                     # print("a =",a)
                     if j == 0:
                         # ajouter le premier elt de la liste
