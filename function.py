@@ -4,6 +4,7 @@
 """
 import functionUsers
 from FunctionMatrix import *
+import FunctionMatrix as fm
 from functionUsers import *
 
 
@@ -40,29 +41,29 @@ def book_exist(file1, name):
     if exist == None:
         return None
 
-def addBook(file: str, name: str = None):
+def addBook(file: str, file2:str, name: str = None):
     """function to add a book at the end of the file
-    file: the file un want to read (.txt)
+    file: book (.txt)
+    file2: matrix.txt
     name: the name of the book you want to append"""
     if name != None:
         name = str(input("Entrez le titre du livre à ajouter : "))
-    exist = False
-    # open file in read mode
-    with open(file, "r", encoding='utf-8') as f:
-        # read open file
-        content = f.readlines()
-        for ligne in content:
-            ligne2 = ligne.strip('\n')
-            # print("ligne2 :", ligne, " and ", name, ("?"))
-            if ligne2 == name:
-                print("Ce livre est déjà dans le dépôt")
-                exist = True
+    exist = book_exist(file,name)
 
     if exist == False:
         j = open(file, "a", encoding='utf-8')
         j.write(name)
         j.close()
+    else:
+        return(print("il existe déja"))
+    #append it at the end of matrix
+    Matrix = fm.import_matrix(file2)
+    Matrix[0].append(name)
+    for i in range(len(Matrix)-1):
+        Matrix[i].append('0')
 
+    print("le livre a bien été ajouté, et la amtrice mise a jour")
+    fm.save_matrix(file, Matrix)
 
 def changeTitle(file: str):
     """function to modify an existing book in file
@@ -96,8 +97,8 @@ def changeTitle(file: str):
             for elt in data_list:
                 f.write(elt)
 
-def saisir_livres(file1):
-    L=[]
+def saisir_livres(file1): # a squoi sa sert
+    L = []
     stop = False
     with open(file1,"a") as bookread:
             while not stop:
@@ -240,7 +241,6 @@ def booksread_addBook(file,file1, file2, reader): #! ajouter la verif du profil 
                         return print("Vous avez déjà entré ce livre")
                 # if not written, add position related to the book at the end of the line, and separated byt a coma
                 l3 = ligne.strip('\n')
-                #print("l3", l3)
                 l3 = l3 + " ," + str(position) +'\n'
                 data_list.append(l3)
             else:

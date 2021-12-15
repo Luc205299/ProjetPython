@@ -15,17 +15,13 @@ def init_Matrix(file1, file2, file3=None):
     with open(file2, "r", encoding='utf-8') as f:
 
         line = f.readlines()
-        #print("line =", len(line), line)
-
         # if the folder isn't empty
         if len(line) != 0:
             # if already initialized, import the matrix from the file
             Matrix = import_matrix(file2)
             print("init from Matrix file")
-
-        #if the folder is empty
+        # if the folder is empty
         else:
-            #print(len(line))
             # import first line of the matrix with
             with open(file1, "r", encoding='utf-8') as bks:
                 line = bks.readlines()
@@ -33,20 +29,14 @@ def init_Matrix(file1, file2, file3=None):
                 for elt in line:
                     tmp.append(elt.strip("\n"))
                 Matrix.append(tmp)
-            #print("       témoin")
             # import each line to init from readers in case of many readers but 0 notes
             with open(file3, "r", encoding='utf-8') as f2:
                 # for each reader in the folder
                 line = f2.readlines()
                 tmp_final = []
                 for elt in line:
-
                     tmp = [i - i for i in range(len(Matrix[0]) - 1)]
-                    print("elt reader =", elt.strip("\n").split(",")[0])
                     tmp[0] = elt.strip("\n").split(",")[0]
-                    #print("tmp avant", tmp)
-                    #tmp.append(elt.strip("\n").split(",")[0])
-                    print("tmp après ",tmp)
                     # update matrix folder
                     save_matrix(file2, Matrix)
                     tmp_final.append(tmp)
@@ -58,7 +48,6 @@ def init_Matrix(file1, file2, file3=None):
     print("Matrice:")
     for line in Matrix:
         print(line)
-    #return Matrix
 
 def update_Matrix(file1, file2, reader) -> list:
     """update the matrix with notes of each reader
