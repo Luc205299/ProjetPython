@@ -1,6 +1,7 @@
 from FunctionMatrix import *
 import FunctionMatrix as fm
 from math import *
+from functionUsers import*
 
 Matrix1 = import_matrix("Matrix.txt")
 Matrix_simi = []
@@ -39,35 +40,18 @@ def init_matrixSimi(file, Matrix):
 init_matrixSimi("Matrice_similarité.txt",Matrix1)
 
 
-def book_suggestion(file):
-    """suggest a book nased on the similaritude matrix"""  # optimisation: fr jusqu'au prenom déja existante donc fct update matrix*
+def book_suggestion(file1,file2,file3,name):
+    """suggest a book nased on the similaritude matrix
+    -file1 : readers.txt
+    -Matrix : Matrice_similarité.txt
+    -file3 : booksread.txt
+    -name : name of the user"""
+    # optimisation: fr jusqu'au prenom déja existante donc fct update matrix*
+    exist=users_exist(file3, name)
+    for line in range(1,len(Matrix)+1):
+        for rows in range(1,len(Matrix[i])):
+            a=
 
-"""    Entrée: Les
-    fichiers
-    readers.txt
-    et
-    booksread.txt, la
-    matrice
-    de
-    notation
-    Sortie: Le
-    fichier
-    booksread.txt
-    mis
-    à
-    jour
-    Démarche:
-    - Demander
-    à
-    l’utilisateur
-    de
-    saisir
-    son
-    pseudonyme.
-    - Vérifier
-    qu’il
-    existe
-    bien
-    dans
-    le
-    fichier « booksread.txt » """
+
+
+

@@ -11,36 +11,39 @@ print(Matrix1[1])
 save_matrix("Matrix.txt",Matrix1)"""
 
 
-def import_matrix(file,m):
-    #global Matrix
-    m = []
-    print(m)
-    n=m
-    with open(file, "r") as f:
-        line = f.readline()
-        L = []
-        while line != "":
-            print("j",line)
-            a = line.strip("\n").strip(' [ ').strip(' ]')
-            print("A = ", a, len(a))
-            a = list(map(str, a))
-            for i in a:
-
-                if 58 > ord(i) > 47:
-                    print(i)
-                    L.append(i)
-                    results = [int(i) for i in L]
-                    print("L : ", L)
-                print("res    =     : ", results)
-            n.append(results)
-            line = f.readline()
+"""def import_matrix(file):
+    n = []
+    with open(file, "r", encoding='utf-8') as f:
+        line = f.readlines()
+        # read the file
+        for i in range(len(line)):
+            print("line      : ",len(line))
             L = []
-            print("PPPPPP    =", n)
+            if i == 0:
+                # tmp=[]
+                tmp = line[i].strip(',\n').split(",")
+                print("tmp= ",tmp)
+                L = tmp
+            else:
+                a = line[i].strip(',\n').split(",")
+                for j in range(len(a)):
+                    # print("a =",a)
+                    if j == 0:
+                        # ajouter le premier elt de la liste
+                        L.append(a[0])
+                    else:
+                        print("a       : ",a)
+                        a = line[i].strip('\n').split(",")
+                        print("\na mofif : ", a,"\n")
+                        print("a[j]   =",a[j],j)
+                        L.append(a[j])
+                        print("L    =",L)
+            n.append(L)
     return n
 
-n=[]
-import_matrix(f"Matrix.txt",n)
-print(n)
+
+a=import_matrix("Matrix.txt")
+print(a)"""
 """P=[]
 with open("Matrix.txt","r") as f :
     line=f.readline()
@@ -95,3 +98,6 @@ results = [float(i) for i in x]
 print(results)
 """
 
+
+
+print(username_ascii("AZERTYUIOPQ5DFGHJKLMWXCVBN"))

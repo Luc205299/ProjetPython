@@ -1,24 +1,24 @@
 from FunctionMatrix import *
 
 
-# Fonction permettant de créer le profil de l'utilisateur avec le nom, le genre , l'age, et le style aimé par l'users !!!TRADUIRE EN ANGLAIS!!! """
+
 def Profil(file, file2, Matrix):
+    """Function to create user profile with name, gender, age, and style liked by the user
+    file : readers.txt
+    file2 : booksread.txt
+    Matrix : Matrix
+    """
     with open(file, "a") as readers:
         with open(file2, "a") as br:
+            # ask the username and add it to the file "readers.txt" and "booksread.txt"
             Pseudo = str(input("Enter your name : "))
-            # Add the username to the file "readers.txt"
+            while users_exist(file, Pseudo)==True or username_ascii(Pseudo)==False:
+                Pseudo = str(input("Enter your name (only letter and capital letter): "))
             readers.write(Pseudo + ",")
             br.write(Pseudo + " ,\n")
 
-            """cette partie ne fais pas attention aux doublets a refaire"""  # Add the username to the Matrix ne fais pas attention aux doublets
-
-            print("Matrice est =", Matrix)
-            print("Matrix 0 =", Matrix[0], '\n', "len(Matrix[0])",len(Matrix[0]))
             temp_list = [i - i for i in range(len(Matrix[0]))]
-            print("len=", len(temp_list))
             temp_list[0] = Pseudo
-            print(temp_list)
-            print("len ", len(temp_list))
             Matrix.append(temp_list)
         Genre = 0
         while Genre <= 0 or Genre > 4:
@@ -97,3 +97,11 @@ def users_exist(file, name):
             else:
                 line = f.readline()
         return False
+
+def username_ascii(name):
+    for i in name:
+        if 65<=ord(i)<=90 or 97<=ord(i)<=122:
+            verif=True
+        else:
+            return False
+    return verif
