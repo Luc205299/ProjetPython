@@ -1,22 +1,26 @@
 from FunctionMatrix import*
 
 """Fonction permettant de créer le profil de l'utilisateur avec le nom, le genre , l'age, et le style aimé par l'users !!!TRADUIRE EN ANGLAIS!!! """
-def Profil(file,file2) :
-    global Matrix
-    with open (file,"a") as readers:
-        with open(file2,"a") as br:
-            Pseudo=str(input("Enter your name : "))
-            """ Add the username to the file "readers.txt" """
+def Profil(file, file2, Matrix) :
+    #global Matrix
+    with open (file, "a") as readers:
+        with open(file2, "a") as br:
+            Pseudo = str(input("Enter your name : "))
+            # Add the username to the file "readers.txt"
             readers.write(Pseudo+" ,")
             br.write(Pseudo+" ,\n")
-            """ Add the username to the Matrix """
+
+            """cette partie ne fais pas attention aux doublets a refaire""" # Add the username to the Matrix ne fais pas attention aux doublets
+
+            print("Matrice est =", Matrix)
             temp_list = [i - i for i in range(len(Matrix[0]) - 1)]
             print(temp_list)
             temp_list[0] = Pseudo
             print(temp_list)
             Matrix.append(temp_list)
-        Genre=0
-        while Genre <= 0 or Genre>4:
+
+        Genre = 0
+        while Genre <= 0 or Genre > 4:
             Genre = int(input("Si vous êtes un Homme tapez 1 ; \nSi vous êtes une Femme tapez 2 ; \nSi vous souhaitez ne pas rentrer votre genre, tapez 3 : "))
             match Genre:
                 case 1:
@@ -52,7 +56,7 @@ def Connection(file,name):
                 if name in line:
                     verification = True
                 else:
-                    line=readers.readline()
+                    line = readers.readline()
         print("bonjour ",name)
 
 #recherche du profil d'un utilisateur
@@ -86,7 +90,7 @@ def users_exist(file,name):
     """"file : reader.txt"""
     with open(file, "r") as f:
         line=f.readline()
-        while line!= "":
+        while line != "":
             if name in line:
                 return True
             else:

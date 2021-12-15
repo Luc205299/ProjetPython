@@ -5,12 +5,11 @@ Matrix_simi = []
 
 
 def init_matrixSimi(file):
-    """file:readers.txt"""
+    """file : readers.txt"""
     global Matrix, Matrix_simi
     # add every reader in the line and rows
     tmp_list = ['0']
     for line in Matrix:
-        #for elt in line:
          # every name is append on the list
          tmp_list.append(line[0])
     #add names as the first line
@@ -34,6 +33,7 @@ def init_matrixSimi(file):
 
         Matrix_simi.append(tmp_list)
     save_matrix(file, Matrix_simi)
+
 
 
 def book_suggestion(file):
