@@ -57,8 +57,9 @@ def Connection(file, name):
         print("bonjour ", name)
 
 
-# recherche du profil d'un utilisateur
+
 def DisplayUsers(file, file2, name):
+    """Seek and show the profil of an user"""
     with open(file, "r") as readers:
         verification = False
         while verification == False:

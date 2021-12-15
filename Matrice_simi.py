@@ -41,4 +41,32 @@ init_matrixSimi("Matrice_similarité.txt")
 
 def book_suggestion(file):
     """suggest a book nased on the similaritude matrix"""  # optimisation: fr jusqu'au prenom déja existante donc fct update matrix
-    pass
+"""    Entrée: Les
+    fichiers
+    readers.txt
+    et
+    booksread.txt, la
+    matrice
+    de
+    notation
+    Sortie: Le
+    fichier
+    booksread.txt
+    mis
+    à
+    jour
+    Démarche:
+    - Demander
+    à
+    l’utilisateur
+    de
+    saisir
+    son
+    pseudonyme.
+    - Vérifier
+    qu’il
+    existe
+    bien
+    dans
+    le
+    fichier « booksread.txt » """
