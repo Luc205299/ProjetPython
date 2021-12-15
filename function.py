@@ -97,7 +97,9 @@ def changeTitle(file: str):
             for elt in data_list:
                 f.write(elt)
 
-def saisir_livres(file1): # a squoi sa sert
+def saisir_livres(file1:str=None)->bool: # a squoi sa sert
+    """ne fais rien et n'est pas utilisé
+    file1 : file.txt permet d'apcceder au dossier en question"""
     L = []
     stop = False
     with open(file1,"a") as bookread:

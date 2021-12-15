@@ -7,19 +7,16 @@ def init_Matrix(file1, file2, file3=None):
     """create a matrix with books as columns, persons as rows
     file1: books.txt
     file2: matrix.txt
-    file3: readers.txt optionnal
-    """
-    # import the global matrix
+    file3: readers.txt optionnal"""
     global Matrix
     # append the book line as the line[0] in the matrix
     with open(file2, "r", encoding='utf-8') as f:
-
         line = f.readlines()
         # if the folder isn't empty
         if len(line) != 0:
             # if already initialized, import the matrix from the file
             Matrix = import_matrix(file2)
-            print("init from Matrix file")
+
         # if the folder is empty
         else:
             # import first line of the matrix with
@@ -42,12 +39,6 @@ def init_Matrix(file1, file2, file3=None):
                     tmp_final.append(tmp)
                 for elt in tmp_final:
                     Matrix.append(elt)
-
-    print("Matrice:")
-    print(Matrix)
-    print("Matrice:")
-    for line in Matrix:
-        print(line)
 
 def update_Matrix(file1, file2, reader) -> list:
     """update the matrix with notes of each reader
@@ -101,26 +92,22 @@ def save_matrix(file, Matrix):
 
 
 def import_matrix(file):
-    global Matrix
-    Matrix = []
+    n = []
     with open(file, "r", encoding='utf-8') as f:
         line = f.readlines()
         # read the file
         for i in range(len(line)):
             L = []
             if i == 0:
-                # tmp=[]
                 tmp = line[i].strip(',\n').split(",")
                 L = tmp
             else:
                 a = line[i].strip(',\n').split(",")
                 for j in range(len(a)):
-                    # print("a =",a)
                     if j == 0:
-                        # ajouter le premier elt de la liste
                         L.append(a[0])
                     else:
                         a = line[i].strip('\n').split(",")
-                        L.append(a[i])
-            Matrix.append(L)
-    return Matrix
+                        L.append(a[j])
+            n.append(L)
+    return n
