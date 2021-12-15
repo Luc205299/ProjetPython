@@ -1,18 +1,19 @@
 from FunctionMatrix import *
+import FunctionMatrix as fm
 from math import *
 
 Matrix_simi = []
 
 
-def init_matrixSimi(file):
+def init_matrixSimi(file, Matrix):
     """file : readers.txt"""
-    global Matrix, Matrix_simi
+    global Matrix_simi
     # add every reader in the line and rows
     tmp_list = ['0']
     for line in Matrix:
-         # every name is append on the list
-         tmp_list.append(line[0])
-    #add names as the first line
+        # every name is append on the list
+        tmp_list.append(line[0])
+    # add names as the first line
     Matrix_simi.append(tmp_list)
 
     tmp_list = ['0']
@@ -34,6 +35,8 @@ def init_matrixSimi(file):
         Matrix_simi.append(tmp_list)
     save_matrix(file, Matrix_simi)
 
+
+init_matrixSimi("Matrice_similarité.txt")
 
 
 def book_suggestion(file):

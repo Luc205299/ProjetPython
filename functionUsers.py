@@ -13,22 +13,17 @@ def Profil(file, file2, Matrix) :
             """cette partie ne fais pas attention aux doublets a refaire""" # Add the username to the Matrix ne fais pas attention aux doublets
 
             print("Matrice est =", Matrix)
+            print("Matrix 0 =", Matrix[0],'\n',len(Matrix[0]))
             temp_list = [i - i for i in range(len(Matrix[0]) - 1)]
             print(temp_list)
             temp_list[0] = Pseudo
             print(temp_list)
+            print("len ",len(temp_list))
             Matrix.append(temp_list)
 
         Genre = 0
         while Genre <= 0 or Genre > 4:
             Genre = int(input("Si vous êtes un Homme tapez 1 ; \nSi vous êtes une Femme tapez 2 ; \nSi vous souhaitez ne pas rentrer votre genre, tapez 3 : "))
-            match Genre:
-                case 1:
-                    Genre = 1
-                case 2 :
-                    Genre = 2
-                case 3 :
-                    Genre = 3
         readers.write(str(Genre)+" ,")
         # age : en dessous de 18 ans , 18-25 ans  et + de 25 ans
         Age = int(input("Rentrer votre âge : "))
