@@ -40,22 +40,27 @@ def init_Matrix(file1, file2, file3=None):
                 for elt in tmp_final:
                     Matrix.append(elt)
 
-def update_Matrix(file1, file2, reader) -> list:
+
+def update_Matrix(file1, file2, reader, book=None) -> list:
     """update the matrix with notes of the reader
-    file1: books
-    file2: booksread
+    file1: books.txt
+    file2: booksread.txt
     reader: the logged user"""
-    global Matrix
-    book = str(input("Entrez le titre du livre a noter :"))
+    #global Matrix
+    Matrix = import_matrix("Matrix.txt")
+    #Matrix = matrix
+    if book == None:
+        book = str(input("Entrez le titre du livre a noter :"))
     # if the book exist and has already been readen
     test = booksread_verify(file1, file2, reader, book)
+    print("test =", test)
     if test[0] == True:
         position = test[1]
         note = 0
         while note <= 0 or note > 5:
             note = int(input("Veuillez entrer votre note, entre 1 et 5 : "))
 
-    elif test == False:
+    elif test[0] == False:
         return print("Veillez lire le livre en question avant de le noter.")
     else:
         return print(test)
@@ -79,14 +84,14 @@ def update_Matrix(file1, file2, reader) -> list:
 
 
 def save_matrix(file, Matrix):
-    #global Matrix
+    # global Matrix
     with open(file, "w", encoding='utf-8') as f:
-        #print("Matrix",len(Matrix), '\n',Matrix)
+        # print("Matrix",len(Matrix), '\n',Matrix)
         for i in range(len(Matrix)):
 
-            #print("i =",i)
+            # print("i =",i)
             for j in range(len(Matrix[i])):
-               # print("j =",j)
+                # print("j =",j)
                 f.write(str(Matrix[i][j]) + ",")
             f.write("\n")
 
@@ -110,8 +115,4 @@ def import_matrix(file):
                         a = line[i].strip('\n').split(",")
                         L.append(a[j])
             n.append(L)
-    # transform each str note to int an int value
-    for line in range(1, len(n)):
-        for row in range(1, len(n[line])):
-            n[line][row] = int(n[line][row])
     return n

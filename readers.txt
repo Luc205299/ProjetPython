@@ -2,3 +2,5 @@ tyyt,2 ,3 ,1
 ozoz,2 ,3 ,6
 ytty,3 ,1 ,6
 yuiol,2 ,1 ,7
+table,2 ,1 ,5
+voila,3 ,1 ,5
