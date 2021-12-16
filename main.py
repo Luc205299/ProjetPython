@@ -1,9 +1,11 @@
-from functionUsers import *
-from function import *
-import FunctionMatrix as fm
-from Matrice_simi import *
+from function_matrix import *
+import function_matrix as fm
+from function_books import *
+from math import *
+from function_users import *
 
-fm.init_Matrix("Books.txt", "Matrix.txt", "readers.txt")  # "Matrix =" l'init?
+
+fm.init_Matrix("Books.txt", "Matrix.txt", "readers.txt")
 Matrix = fm.Matrix
 
 # on demande si il veut se creer un profil, se connecter, rechercher un utilisateur ou quitter
