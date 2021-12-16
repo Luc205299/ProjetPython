@@ -77,7 +77,6 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
     print("Matrice:")
     for line in Matrix:
         print(line)
-
     # met a jour la matrice avec la nouvelle note
     save_matrix("Matrix.txt", Matrix)
     return Matrix

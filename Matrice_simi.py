@@ -128,6 +128,3 @@ def book_suggestion(file1, file2, file3, file4, name: str):
     else:
         # reminder to note the book
         return print("N'oubliez pas de le noter quand vous aurez fini !")
-
-
-book_suggestion("readers.txt", "Matrice_similarité.txt", "booksread.txt", "Books.txt", "table")
