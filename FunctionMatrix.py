@@ -41,7 +41,7 @@ def init_Matrix(file1, file2, file3=None):
                     Matrix.append(elt)
 
 def update_Matrix(file1, file2, reader) -> list:
-    """update the matrix with notes of each reader
+    """update the matrix with notes of the reader
     file1: books
     file2: booksread
     reader: the logged user"""
@@ -110,4 +110,8 @@ def import_matrix(file):
                         a = line[i].strip('\n').split(",")
                         L.append(a[j])
             n.append(L)
+    # transform each str note to int an int value
+    for line in range(1, len(n)):
+        for row in range(1, len(n[line])):
+            n[line][row] = int(n[line][row])
     return n

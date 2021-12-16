@@ -209,8 +209,8 @@ def booksread_verify(file1, file2, reader, title):
         return False
 
 
-def booksread_addBook(file,file1, file2, reader): #! ajouter la verif du profil existant ou pas
-    """create a folder with each reader and the books he has readen
+def booksread_addBook(file,file1, file2, reader):
+    """update the folder with each reader and the books he has readen
     file1: books
     file2: booksread
     reader, the currently logged user"""
