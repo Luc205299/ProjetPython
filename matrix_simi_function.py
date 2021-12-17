@@ -66,9 +66,9 @@ def book_suggestion(file1, file2, file3, file4, name: str):
     # optimisation: fr jusqu'au prenom déja existante donc fct update matrix*
 
     # test if the user is connected with an existing pseudo
-    # exist = users_exist(file1, name)
-    # if exist == False:
-    #     return print("Veuillez vous inscrire d'abord")
+    exist = users_exist(file1, name)
+    if exist == False:
+        return print("Veuillez vous inscrire d'abord")
 
     matrix = import_matrix(file2)
     # transform each str note to int an int value
