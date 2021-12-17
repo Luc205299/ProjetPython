@@ -4,6 +4,13 @@ from function_books import *
 from math import *
 from function_users import *
 
+def is_empty(file)->bool:
+    """return true if a folder is empty"""
+    with open(file, "r", encoding='utf-8') as f:
+        content=f.readlines()
+        if len(content)==0:
+            return True
+    return False
 
 def ShowBook(file: str):
     """function to open and read the Books file and print what's inside
@@ -55,15 +62,15 @@ def addBook(file: str, file2: str, name: str = None):
         j.write(name)
         j.close()
     else:
-        return (print("il existe déja"))
+        return print("il existe déja")
     # append it at the end of matrix
-    Matrix = fm.import_matrix(file2)
-    Matrix[0].append(name)
-    for i in range(len(Matrix) - 1):
-        Matrix[i].append('0')
+    matrix = fm.import_matrix(file2)
+    matrix[0].append(name)
+    for i in range(len(matrix) - 1):
+        matrix[i].append('0')
 
     print("le livre a bien été ajouté, et la amtrice mise a jour")
-    fm.save_matrix(file, Matrix)
+    fm.save_matrix(file, matrix)
 
 
 def changeTitle(file: str):
@@ -221,7 +228,7 @@ def booksread_addBook(file, file1, file2, reader,title=None):
     file2: booksread
     reader, the currently logged user"""
     # verifiy is the user is connected
-    if functionUsers.users_exist(file, reader) == False:
+    if users_exist(file, reader) == False:
         return print("erreur nom d'utilisateur, prière de vous connecter avec un identifiant valide")
     # title of the book for identification
     if title==None:

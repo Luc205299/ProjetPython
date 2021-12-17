@@ -59,16 +59,16 @@ def init_matrixSimi(file, file2):
 def book_suggestion(file1, file2, file3, file4, name: str):
     """suggest a book nased on the matrix_simi
     -file1 : readers.txt
-    -file2 : Matrice_similarité.txt
+    -file2 : matrix_simi.txt
     -file3 : booksread.txt
     -file4 : books.txt
     -name : name of the user"""
     # optimisation: fr jusqu'au prenom déja existante donc fct update matrix*
 
     # test if the user is connected with an existing pseudo
-    # exist = users_exist(file1, name)
-    # if exist == False:
-    #     return print("Veuillez vous inscrire d'abord")
+    exist = users_exist(file1, name)
+    if exist == False:
+        return print("Veuillez vous inscrire d'abord")
 
     matrix = import_matrix(file2)
     # transform each str note to int an int value
