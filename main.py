@@ -53,10 +53,14 @@ while Interface == "" or type(Interface) != int() or Interface > 0 or Interface 
             init_matrixSimi("readers.txt", "matrix.txt")
             book_suggestion("readers.txt", "matrix_simi.txt", "booksread.txt", "books.txt", pseudo)
 
+        case 11:
+            ShowBook("books.txt")
+
     # keep user in the  while loop
     Interface = 100
     Interface = int(
         input("Que voulez vous faire ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n 3 pour "
               "rechercher un utilisateur;\n 4 pour saisir les livres que vous avez lus; "
               "\n 5 pour ajouter une note à un livre;\n 6 pour supprimer votre compte;\n 7 pour vérifier que le "
-              "compte existe;\n 8 pour quitter : \n 9 pour déco ;\n 10 pour recommander un livre"))
+              "compte existe;\n 8 pour quitter : \n 9 pour déco ;\n 10 pour recommander un livre; \n11 pour voir les livres"
+              " disponibles ;\n :"))

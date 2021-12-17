@@ -12,6 +12,9 @@ def init_matrixSimi(file, file2):
     file : readers.txt
     file 2: matrix"""
     global Matrix_simi
+    # securised exectution
+    if is_empty(file2) == True:
+        return print("\nVeuillez créer un compte avant.\n")
     matrix1 = import_matrix(file2)
     # transform each str note to int an int value
     for line in range(1, len(matrix1)):
@@ -70,6 +73,9 @@ def book_suggestion(file1, file2, file3, file4, name: str):
     if exist == False:
         return print("Veuillez vous inscrire d'abord")
 
+    # init the matrix to import it later
+    init_matrixSimi(file1, "matrix_simi.txt")
+    # import the new updated matrix_simi
     matrix = import_matrix(file2)
     # transform each str note to int an int value
     for line in range(1, len(matrix)):

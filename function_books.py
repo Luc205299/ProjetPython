@@ -4,13 +4,18 @@ from function_books import *
 from math import *
 from function_users import *
 
-def is_empty(file)->bool:
+
+def is_empty(file) -> bool:
     """return true if a folder is empty"""
+    # open file in read mode
     with open(file, "r", encoding='utf-8') as f:
-        content=f.readlines()
-        if len(content)==0:
+        content = f.readlines()
+        # if file is empty, return True
+        if len(content) == 0:
             return True
+    #else return false
     return False
+
 
 def ShowBook(file: str):
     """function to open and read the Books file and print what's inside
@@ -21,11 +26,10 @@ def ShowBook(file: str):
     with open(file, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-    cpt = 1
-    for line in content:
-        print(cpt, ":", str(line), '\n')
-        cpt += 1
-    return ()
+    # print every book in the folder, with it number
+    for count, content in enumerate(content):
+        print(count, ":", content)
+    return print("\n")
 
 
 def book_exist(file1, name):
@@ -204,24 +208,24 @@ def booksread_verify(file1, file2, reader, title):
     with open(file2, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-        #print("content", content)
+        # print("content", content)
         for ligne in content:
-            #print("ligne =", ligne)
+            # print("ligne =", ligne)
             l2 = ligne.strip(',\n').strip('').split(',')
-            #print("l2=", l2)
+            # print("l2=", l2)
             # verify if the book is already written
             if l2[0] == reader:
                 # if found, stop the process with return function, from the second elt in list
                 for elt in l2[1:]:
                     # may pose pb with the end of line with \n
-                    #print("elt==", elt, "position", position)
+                    # print("elt==", elt, "position", position)
                     if int(elt) == int(position):
-                        #print("Vous avez bien lu ce livre")
+                        # print("Vous avez bien lu ce livre")
                         return True, position
         return False
 
 
-def booksread_addBook(file, file1, file2, reader,title=None):
+def booksread_addBook(file, file1, file2, reader, title=None):
     """update the folder with each reader and the books he has readen
     file: readers
     file1: books
@@ -231,7 +235,7 @@ def booksread_addBook(file, file1, file2, reader,title=None):
     if users_exist(file, reader) == False:
         return print("erreur nom d'utilisateur, prière de vous connecter avec un identifiant valide")
     # title of the book for identification
-    if title==None:
+    if title == None:
         #
         title = str(input("Entrez le titre du nouveau livre que vous avez lu :"))
     test = book_exist(file1, title)
@@ -258,10 +262,10 @@ def booksread_addBook(file, file1, file2, reader,title=None):
                         return print("Vous avez déjà entré ce livre")
                 # if not written, add position related to the book at the end of the line, and separated byt a coma
                 l3 = ligne.strip(',\n')
-                print ("l3 avant ", l3)
+                print("l3 avant ", l3)
                 l3 = l3 + "," + str(position) + '\n'
                 data_list.append(l3)
-                print("l3 avant ", l3, "\ndata",data_list)
+                print("l3 avant ", l3, "\ndata", data_list)
             else:
                 data_list.append(ligne)
 

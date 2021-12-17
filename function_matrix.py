@@ -46,9 +46,8 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
     file1: books.txt
     file2: booksread.txt
     reader: the logged user"""
-    #global Matrix
+    # global Matrix
     Matrix = import_matrix("Matrix.txt")
-    #Matrix = matrix
     if book == None:
         book = str(input("Entrez le titre du livre a noter :"))
     # if the book exist and has already been readen
