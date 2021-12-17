@@ -3,7 +3,7 @@ import function_matrix as fm
 from function_books import *
 from math import *
 from function_users import *
-
+from matrix_simi_function import*
 
 fm.init_Matrix("Books.txt", "Matrix.txt", "readers.txt")
 Matrix = fm.Matrix

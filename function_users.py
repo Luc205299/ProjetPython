@@ -19,31 +19,34 @@ def Profil(file, file2, Matrix):
             temp_list = [i - i for i in range(len(Matrix[0]))]
             temp_list[0] = Pseudo
             Matrix.append(temp_list)
-        Genre = 0
-        while Genre <= 0 or Genre > 4:
-            Genre = int(input(
-                "Si vous êtes un Homme tapez 1 ; \nSi vous êtes une Femme tapez 2 ; \nSi vous souhaitez ne pas rentrer votre genre, tapez 3 : "))
-        readers.write(str(Genre) + ",")
-        # age : en dessous de 18 ans , 18-25 ans  et + de 25 ans
+        Gender = 0
+        while Gender <= 0 or Gender > 4:
+            Gender = int(input("If you are a Man type 1 ;\nIf you are a Woman type 2 ;\nIf you do not wish to enter your Gender, type 3 : "))
+        readers.write(str(Gender) + ",")
+        # age : below 18 years old , 18-25 years old  and more than 25 years old
         Age = int(input("Rentrer votre âge : "))
         match Age:
             case Age if Age < 18:
-                print("Vous avez en dessous de 18 ans.")
+                print("You are under 18 years old.")
                 Age = 1
             case Age if Age >= 18 and Age <= 25:
-                print("Vous avez entre 18 et 25 ans.")
+                print("You are between 18 and 25 years old.")
                 Age = 2
             case Age if Age > 25:
-                print("Vous avez au dessus de 25 ans")
+                print("You are over 25 years old")
                 Age = 3
         readers.write(str(Age) + ",")
         Style = int(input(
-            "Rentrer 1 si vous aimer la Science-fiction,\nRentrer 2 si vous aimer la Biographie,\nRentrer 3 si vous aimer l'Horreur,\nRentrer 4 si vous aimer la Romance,\nRentrer 5 si vous aimer les Fables,\nRentrer 6 si vous aimer l'Histoire,\nRentrer 7 si vous aimer la Comédie : "))
+            "Enter 1 if you like Science Fiction,\nEnter 2 if you like Biography,\nEnter 3 if you like Horror,\nEnter 4 if you like Romance,\nEnter 5 if you like Fables,\nEnter 6 if you like History,\nEnter 7 if you like Comedy:"))
         readers.write(str(Style) + "\n")
 
 
-# Connection a son compte
+# Connection to the user's account
 def Connection(file, name):
+    """ enable the user to connect to his account
+    file : "readers.txt"
+    name : name of the user
+    """
     with open(file, "r") as readers:
         verification = False
         while verification == False:
@@ -58,20 +61,41 @@ def Connection(file, name):
 
 
 def DisplayUsers(file, file2, name):
-    """Seek and show the profil of an user"""
+    """Seek and show the profil of an user
+    file : readers.txt
+    file 2 : booksred.txt
+    name : name of the user
+    """
     with open(file, "r") as readers:
-        verification = False
-        while verification == False:
-            line = readers.readline()
-            while line != "" and verification == False:
-                if name in line:
-                    verification = True
-                else:
-                    line = readers.readline()
-    return (print(line))
+        with open(file2 , "r") as br:
+            verification = False
+            verification2 = False
+            while verification == False:
+                line = readers.readline()
+
+                while line != "" and verification == False:
+                    if name in line:
+                        verification = True
+                    else:
+                        line = readers.readline()
+            while verification2 == False:
+                line2 = br.readline()
+                while line2 != "" and verification2 == False:
+                    if name in line2:
+                        verification2 = True
+                    else:
+                        line2 = br.readline()
+    return (print("readersd : ",line,"booksread : ", line2))
 
 
 def DeleteUsers(file, file2, name):
+    """ delete the user in readers.txt and booksread.txt
+
+    :param file: readers.txt
+    :param file2: booksread.txt
+    :param name: name of the user
+    :return: nothing
+    """
     with open(file, "r") as f:
         with open(file2, "r") as b:
             lines2 = b.readlines()
@@ -87,7 +111,12 @@ def DeleteUsers(file, file2, name):
 
 
 def users_exist(file, name):
-    """"file : reader.txt"""
+    """
+    Seek if the user exist in the file readers.txt
+    :param file: readers.txt
+    :param name: name of the user
+    :return: True if the username exist and False if he doesn't
+    """
     with open(file, "r") as f:
         line = f.readline()
 
@@ -100,6 +129,11 @@ def users_exist(file, name):
         return False
 
 def username_ascii(name):
+    """
+    allows to secure the entry of the user name
+    :param name: username of the user
+    :return: True if the username is correct and False if he doesn't correct
+    """
     for i in name:
         if 65<=ord(i)<=90 or 97<=ord(i)<=122:
             verif=True
