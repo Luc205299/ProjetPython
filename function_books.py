@@ -188,16 +188,20 @@ def booksread_verify(file1, file2, reader, title):
         return f": {title} doesn't exist, add it before."
     else:
         position = test
+    print("test =", test, title)
     # open file in read mode
     with open(file2, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
+        print(content)
         for line in content:
             l2 = line.strip(',\n').strip('').split(',')
             # verify if the book is already written
-            if l2[0] == reader:
+            print(l2[0], " == ", reader)
+            if l2[0].strip(' ') == reader:
                 # if found, stop the process with return function, from the second elt in list
                 for elt in l2[1:]:
+                    print(elt, "==",position)
                     if int(elt) == int(position):
                         return True, position
         return False, 0
@@ -220,7 +224,7 @@ def booksread_addBook(file, file1, file2, reader):
     if test is None:
         return f"{title}, doesn't exist, add it before."
     else:
-        position = test+1
+        position = test
         print("position =", position)
     verification = False
     # copy the data in the file before the changes
@@ -255,4 +259,4 @@ def booksread_addBook(file, file1, file2, reader):
     if verification is False:
         return print("Impossible to find your profile.")
     else:
-       print("Your list has been updated.")
+        print("Your list has been updated.")

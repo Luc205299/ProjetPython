@@ -48,8 +48,9 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
     Matrix = import_matrix("matrix.txt")
     # Matrix = matrix
     if book == None:
-        book = str(input(" What is the title of the book you want to grade :"))
-    # if the book exist and has already been readen
+        book = str(input(" What is the title of the book you want to rate :"))
+    # if the book exist and has already been read
+    print("reader", reader)
     test = booksread_verify(file1, file2, reader, book)
     if test[0] is True:
         position = test[1]
@@ -58,7 +59,7 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
             note = int(input("Enter your grade, from 1 star to 5 : "))
 
     elif test[0] == False:
-        return print("Please, be aware that you need to read the book before.")
+        return print("Please, be aware that you need to read the book before.", test)
     else:
         return print(test)
     cpt = 0
