@@ -37,7 +37,6 @@ def book_exist(file1, name):
     file: books (.txt)
     name: name of the book"""
 
-    exist = None
     # open file in read mode
     with open(file1, "r", encoding='utf-8') as f:
         # read open file
@@ -45,10 +44,8 @@ def book_exist(file1, name):
         for line in content:
             line2 = line.strip('\n')
             if line2 == name:
-                exist = True
-                return content.index(line)
-    if exist is None:
-        return None
+                return True, content.index(line)
+    return False, 0
 
 
 def addBook(file: str, file2: str, name: str = None):
@@ -56,24 +53,23 @@ def addBook(file: str, file2: str, name: str = None):
     file: book (.txt)
     file2: matrix.txt
     name: the name of the book you want to append"""
-    if name is not None:
-        name = str(input("Enter the title of the book : "))
+    if name is None:
+        name = str(input("What is the title of the book : "))
     exist = book_exist(file, name)
 
     if not exist:
         j = open(file, "a", encoding='utf-8')
-        j.write(name)
+        j.write('\n' + name)
         j.close()
     else:
         return print("Book already exist, you can rate it.")
     # append it at the end of matrix
     matrix = fm.import_matrix(file2)
     matrix[0].append(name)
-    for i in range(len(matrix) - 1):
+    for i in range(1, len(matrix)):
         matrix[i].append('0')
-
+    fm.save_matrix(file2, matrix)
     print("Database has been updated.")
-    fm.save_matrix(file, matrix)
 
 
 def changeTitle(file: str):
@@ -113,20 +109,25 @@ def delete_Book(file: str, file2: str, file3: str):
     """ delete an existing book from the repository/library of file in argument
     file : books.txt
     file2: booksread
-    file3 : matrix"""
-    # condition verification if the book exist
-    # global Matrix
+    file3 : matrix.txt"""
+    # if the book exist
     matrix = fm.import_matrix(file3)
     name = str(input("Enter the title of the book to delete :"))
-    position = book_exist(file, name)
-    if position is None:
+    position = book_exist(file, name)[1]
+    print("position", position)
+    if position == 0:
         return print(f"{name} isn't in the database.")
     # list of file data
     data_list = []
-
     # delete the line linked to the book index in the matrix
-    for line in matrix:
-        line.pop(position)
+    for n, elt in enumerate(matrix):
+        print(n, elt)
+    # delete the title on first line
+    test = matrix[0].pop(position)
+    # delete occurences in each line
+    for i in range(1, len(matrix)):
+        matrix[i].pop(position)
+    print(test)
     fm.save_matrix(file3, matrix)
 
     # delete occurrences in booksread
@@ -134,9 +135,11 @@ def delete_Book(file: str, file2: str, file3: str):
         # read open file to search the book occurrences
         content = f2.readlines()
         for elt in content:
-            tmp = elt.strip('\n').split(',')
+
+            tmp = elt.strip(',\n').split(',')
+            print("tmp =",tmp)
             for elt2 in tmp[1:]:
-                # rewrite every value of books minus one, because it has to fill the hole
+                # rewrite every value of books minus one, to fill the hole let by the deleted book
                 if int(elt2) > position:
                     # print("elt2 :", elt2, type(elt2))
 
@@ -175,19 +178,19 @@ def delete_Book(file: str, file2: str, file3: str):
         # write new data in opened file
         for elt in data_list:
             f.write(elt + '\n')
+    print(f"{name} has been deleted.")
 
-
-def booksread_verify(file1, file2, reader, title):
+def booksread_verify(file1, file2, reader, title) -> tuple:
     """verify is a book as been read by the reader
        file1: books
        file2: booksread
        reader, the currently logged user"""
     # check if the title exist
     test = book_exist(file1, title)
-    if test is False:
+    if test[0] is False:
         return f": {title} doesn't exist, add it before."
     else:
-        position = test
+        position = test[1]
     # open file in read mode
     with open(file2, "r", encoding='utf-8') as f:
         # read open file

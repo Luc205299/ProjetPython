@@ -110,7 +110,7 @@ def book_suggestion(file1, file2, file3, file4, name: str):
         else:
             print("Here's our personal suggestions : ")
             print(*line_bks)
-    # imput the concerned book
+    # input the concerned book
     chc = str(input("Pick one up : "))
     while chc not in line_bks:
         chc = str(input("Please, pick one that u see in the following line :"))

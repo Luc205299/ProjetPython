@@ -7,7 +7,7 @@ def init_Matrix(file1, file2, file3=None):
     """create a matrix with books as columns, persons as rows
     file1: books.txt
     file2: matrix.txt
-    file3: readers.txt optionnal, to create the matrix straight from the reader file """
+    file3: readers.txt optional, to create the matrix straight from the reader file """
     global Matrix
     # append the book line as the line[0] in the matrix
     if not is_empty(file2):
