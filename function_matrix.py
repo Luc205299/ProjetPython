@@ -10,29 +10,28 @@ def init_Matrix(file1, file2, file3=None):
     file3: readers.txt optionnal"""
     global Matrix
     # append the book line as the line[0] in the matrix
-    with open(file2, "r", encoding='utf-8') as f:
-        line = f.readlines()
-        # if the folder isn't empty
-        if len(line) != 0:
-            # if already initialized, import the matrix from the file
-            Matrix = import_matrix(file2)
-
-        # if the folder is empty
-        else:
-            # import first line of the matrix with
-            with open(file1, "r", encoding='utf-8') as bks:
-                line = bks.readlines()
-                tmp = ["0"]
-                for elt in line:
-                    tmp.append(elt.strip("\n"))
-                Matrix.append(tmp)
-            # import each line to init from readers in case of many readers but 0 notes
-            with open(file3, "r", encoding='utf-8') as f2:
+    if not is_empty(file2):
+        # if the file isn't empty, import the matrix from the folder
+        Matrix = import_matrix(file2)
+    # if the folder is empty
+    else:
+        # import first line of the matrix with
+        with open(file1, "r", encoding='utf-8') as bks:
+            line = bks.readlines()
+            tmp = ["0"]
+            # create the books line of index 0
+            for elt in line:
+                tmp.append(elt.strip("\n"))
+            Matrix.append(tmp)
+        save_matrix(file2, Matrix)
+        # import each line to init from readers in case of many readers but 0 notes
+        if file3 != None:
+            with open(file3, "r", encoding='utf-8') as f:
                 # for each reader in the folder
-                line = f2.readlines()
+                line = f.readlines()
                 tmp_final = []
                 for elt in line:
-                    tmp = [i - i for i in range(len(Matrix[0]) - 1)]
+                    tmp = [i - i for i in range(len(Matrix[0]))]
                     tmp[0] = elt.strip("\n").split(",")[0]
                     # update matrix folder
                     save_matrix(file2, Matrix)
@@ -40,34 +39,31 @@ def init_Matrix(file1, file2, file3=None):
                 for elt in tmp_final:
                     Matrix.append(elt)
 
-
 def update_Matrix(file1, file2, reader, book=None) -> list:
-    """update the matrix with notes of the reader
+    """update the matrix with note of the reader
     file1: books.txt
     file2: booksread.txt
     reader: the logged user"""
-    #global Matrix
-    Matrix = import_matrix("Matrix.txt")
-    #Matrix = matrix
+    # global Matrix
+    Matrix = import_matrix("matrix.txt")
+    # Matrix = matrix
     if book == None:
-        book = str(input("Entrez le titre du livre a noter :"))
+        book = str(input(" What is the title of the book you want to grade :"))
     # if the book exist and has already been readen
     test = booksread_verify(file1, file2, reader, book)
-    print("test =", test)
-    if test[0] == True:
+    if test[0] is True:
         position = test[1]
-        note = 0
+        note = 10
         while note <= 0 or note > 5:
-            note = int(input("Veuillez entrer votre note, entre 1 et 5 : "))
+            note = int(input("Enter your grade, from 1 star to 5 : "))
 
     elif test[0] == False:
-        return print("Veillez lire le livre en question avant de le noter.")
+        return print("Please, be aware that you need to read the book before.")
     else:
         return print(test)
     cpt = 0
     # first elt of each column is a reader, the first line books
-    print("verif : ", Matrix[cpt][0] == reader)
-    while Matrix[cpt][0] != reader or Matrix[cpt][0] == None:  # ! need the name of the user with OONE space after,
+    while Matrix[cpt][0] != reader or Matrix[cpt][0] is None:
         # match format
         print(f"tentative {cpt}, user = {reader} =  {Matrix[cpt][0]} donc {Matrix[cpt][0] == reader}")
         cpt += 1

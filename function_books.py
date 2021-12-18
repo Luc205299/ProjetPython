@@ -5,6 +5,18 @@ from math import *
 from function_users import *
 
 
+def is_empty(file) -> bool:
+    """return true if a folder is empty"""
+    # open file in read mode
+    with open(file, "r", encoding='utf-8') as f:
+        content = f.readlines()
+        # if file is empty, return True
+        if len(content) == 0:
+            return True
+    # else return false
+    return False
+
+
 def ShowBook(file: str):
     """function to open and read the Books file and print what's inside
     file: the file un want to read (.txt)
@@ -14,30 +26,28 @@ def ShowBook(file: str):
     with open(file, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-    cpt = 1
-    for line in content:
-        print(cpt, ":", str(line), '\n')
-        cpt += 1
-    return ()
+    # print every book in the folder, with it number
+    print("Here is the book database :\n")
+    for count, content in enumerate(content):
+        print(count, ":", content)
 
 
 def book_exist(file1, name):
     """function to search if a book exist and return it number if it is true
-    file: the file un want to read (.txt)
-    name: the name of the book you want to look for"""
+    file: books (.txt)
+    name: name of the book"""
 
     exist = None
     # open file in read mode
     with open(file1, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-        for ligne in content:
-            ligne2 = ligne.strip('\n')
-            if ligne2 == name:
+        for line in content:
+            line2 = line.strip('\n')
+            if line2 == name:
                 exist = True
-                return content.index(ligne)
-
-    if exist == None:
+                return content.index(line)
+    if exist is None:
         return None
 
 
@@ -46,24 +56,24 @@ def addBook(file: str, file2: str, name: str = None):
     file: book (.txt)
     file2: matrix.txt
     name: the name of the book you want to append"""
-    if name != None:
-        name = str(input("Entrez le titre du livre à ajouter : "))
+    if name is not None:
+        name = str(input("Enter the title of the book : "))
     exist = book_exist(file, name)
 
-    if exist == False:
+    if not exist:
         j = open(file, "a", encoding='utf-8')
         j.write(name)
         j.close()
     else:
-        return (print("il existe déja"))
+        return print("Book already exist, you can rate it.")
     # append it at the end of matrix
-    Matrix = fm.import_matrix(file2)
-    Matrix[0].append(name)
-    for i in range(len(Matrix) - 1):
-        Matrix[i].append('0')
+    matrix = fm.import_matrix(file2)
+    matrix[0].append(name)
+    for i in range(len(matrix) - 1):
+        matrix[i].append('0')
 
-    print("le livre a bien été ajouté, et la amtrice mise a jour")
-    fm.save_matrix(file, Matrix)
+    print("Database has been updated.")
+    fm.save_matrix(file, matrix)
 
 
 def changeTitle(file: str):
@@ -71,7 +81,7 @@ def changeTitle(file: str):
     file: the file un want to read (.txt)
     name: the name of the book you want to modify"""
 
-    name = str(input("Entrez le titre du livre à modifier :"))
+    name = str(input("What is the title of the book you want to modify ? :"))
     index_src = None
     # list of file data
     data_list = []
@@ -86,12 +96,12 @@ def changeTitle(file: str):
                 index_src = content.index(ligne)
                 # print(index_src, "index src")
 
-    if index_src == None:
-        return print("Ce livre n'est pas dans la base donnée")
+    if index_src is None:
+        return print("This book isn't in the database.")
 
     elif type(index_src) == int:
         # 2nd open of the file to modify data
-        new_title = str(input("Quel est le nouveau titre de ce livre?"))
+        new_title = str(input("Enter the new title of the book ? :"))
         data_list[index_src] = new_title
         with open(file, "w", encoding='utf-8') as f:
             # write new data open file
@@ -99,43 +109,29 @@ def changeTitle(file: str):
                 f.write(elt)
 
 
-def saisir_livres(file1: str = None) -> bool:  # a squoi sa sert
-    """ne fais rien et n'est pas utilisé
-    file1 : file.txt permet d'apcceder au dossier en question"""
-    L = []
-    stop = False
-    with open(file1, "a") as bookread:
-        while not stop:
-            read = int(input("saisissez le livre avez vous lus"))
-            bookread.write("," + str(read) + " ")
-            verification = str(input("Avez vous d'autre livres à Saisir ? ( yes / no) :"))
-            if verification == "no":
-                stop = True
-
-
-def delete_Book(file: str, file2: str):
+def delete_Book(file: str, file2: str, file3: str):
     """ delete an existing book from the repository/library of file in argument
-    file: str the file in question
     file : books.txt
-    file2: booksread"""
+    file2: booksread
+    file3 : matrix"""
     # condition verification if the book exist
-    global Matrix
-    name = str(input("Entrez le titre du livre à supprimer :"))
+    # global Matrix
+    matrix = fm.import_matrix(file3)
+    name = str(input("Enter the title of the book to delete :"))
     position = book_exist(file, name)
-    if position == None:
-        return print("Ce livre n'est pas dans la base donnée")
+    if position is None:
+        return print(f"{name} isn't in the database")
     # list of file data
     data_list = []
 
     # delete the line linked to the book index in the matrix
-    for line in Matrix:
-        print(f"matrix avant :\n {Matrix}")
+    for line in matrix:
         line.pop(position)
-        print(f"matrix après :\n {Matrix}")
+    fm.save_matrix(file3, matrix)
 
     # delete occurrences in booksread
     with open(file2, "r", encoding='utf-8') as f2:
-        # read open file to search the book occurences
+        # read open file to search the book occurrences
         content = f2.readlines()
         for elt in content:
             tmp = elt.strip('\n').split(',')
@@ -148,7 +144,6 @@ def delete_Book(file: str, file2: str):
 
                 elif int(elt2) == position:
                     tmp.pop(tmp.index(elt2))
-            print(f"il va donc append {tmp}")
             # rewrite every element in the line separated by a coma
             data_list.append(tmp)
 
@@ -169,15 +164,15 @@ def delete_Book(file: str, file2: str):
     with open(file, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-        for ligne in content:
-            l2 = ligne.strip('\n')
+        for line in content:
+            l2 = line.strip('\n')
             if l2 != name:
                 data_list.append(l2)
             else:
-                index_src = content.index(ligne)  # attention au + 1 avc le décalage mais c possible que pb apres
-    # 2nd open of the file to rewrite data with correct list of readed books
+                index_src = content.index(line)
+                # 2nd open of the file to rewrite data with correct list of read books
     with open(file, "w", encoding='utf-8') as f:
-        # write new data in openend file
+        # write new data in opened file
         for elt in data_list:
             f.write(elt + '\n')
 
@@ -189,80 +184,75 @@ def booksread_verify(file1, file2, reader, title):
        reader, the currently logged user"""
     # check if the title exist
     test = book_exist(file1, title)
-    if test == False:
-        return f"Le livre : {title} n'existe pas, essayez de l'ajouter avant."
+    if test is False:
+        return f": {title} doesn't exist, add it before."
     else:
         position = test
     # open file in read mode
     with open(file2, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-        #print("content", content)
-        for ligne in content:
-            #print("ligne =", ligne)
-            l2 = ligne.strip(',\n').strip('').split(',')
-            #print("l2=", l2)
+        for line in content:
+            l2 = line.strip(',\n').strip('').split(',')
             # verify if the book is already written
             if l2[0] == reader:
                 # if found, stop the process with return function, from the second elt in list
                 for elt in l2[1:]:
-                    # may pose pb with the end of line with \n
-                    #print("elt==", elt, "position", position)
                     if int(elt) == int(position):
-                        #print("Vous avez bien lu ce livre")
                         return True, position
-        return False
+        return False, 0
 
 
-def booksread_addBook(file, file1, file2, reader,title=None):
-    """update the folder with each reader and the books he has readen
+def booksread_addBook(file, file1, file2, reader):
+    """update the folder with each reader and the books he has read
     file: readers
     file1: books
     file2: booksread
     reader, the currently logged user"""
-    # verifiy is the user is connected
-    if functionUsers.users_exist(file, reader) == False:
-        return print("erreur nom d'utilisateur, prière de vous connecter avec un identifiant valide")
+    title = str(input("What is the title of the book you are looking for ?"))
+    # verify is the user is connected
+    if not users_exist(file, reader):
+        return print("Please connect with a valid username")
     # title of the book for identification
-    if title==None:
-        #
-        title = str(input("Entrez le titre du nouveau livre que vous avez lu :"))
+    if title is None:
+        title = str(input("Which book did you read ? :"))
     test = book_exist(file1, title)
-    if test == None:
-        return "Le livre :", title, " n'existe pas, essayez de l'ajouter avant"
+    if test is None:
+        return f"{title}, doesn't exist, add it before."
     else:
-        position = test
-
+        position = test+1
+        print("position =", position)
+    verification = False
     # copy the data in the file before the changes
     data_list = []
     # open file in read mode
     with open(file2, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-        for ligne in content:
-            l2 = ligne.strip('\n')
-            l2 = l2.split(',')
+        for line in content:
+            l2 = line.strip('\n').split(' ,')
             # verify if the book isn't already written
             if l2[0] == reader:
+                verification = True
                 # if one is ever found, stop the process with return function
                 for elt in l2:
                     elt2 = str(elt.strip(" "))
                     if str(elt2) == str(position):
-                        return print("Vous avez déjà entré ce livre")
+                        return print("This book has already been added.")
                 # if not written, add position related to the book at the end of the line, and separated byt a coma
-                l3 = ligne.strip(',\n')
-                print ("l3 avant ", l3)
+                l3 = line.strip(',\n')
                 l3 = l3 + "," + str(position) + '\n'
+                print(l3)
                 data_list.append(l3)
-                print("l3 avant ", l3, "\ndata",data_list)
             else:
-                data_list.append(ligne)
+                data_list.append(line)
 
-    # 2nd open of the file to rewrite data with correct list of readed books
+    # 2nd open of the file to rewrite data with correct list of read books
     with open(file2, "w", encoding='utf-8') as f:
-        # write new data in openend file
-        # print("datalist",data_list)
+        # write new data in opened file
         for elt in data_list:
-            # print("elt =", elt)
             f.write(elt)
-    print("vous avez bien ajouté le livre a la liste des lus")
+    if verification is False:
+        return print("Impossible to find your profile.")
+    else:
+       print("Your list has been updated.")
