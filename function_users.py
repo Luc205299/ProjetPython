@@ -24,7 +24,9 @@ def Profil(file, file2, Matrix):
             Gender = int(input("If you are a Man type 1 ;\nIf you are a Woman type 2 ;\nIf you do not wish to enter your Gender, type 3 : "))
         readers.write(str(Gender) + ",")
         # age : below 18 years old , 18-25 years old  and more than 25 years old
-        Age = int(input("Rentrer votre âge : "))
+        Age = int(input("Enter your age : "))
+        while  Age > 130 or Age < 0 :
+            Age = int(input("Enter your age : "))
         match Age:
             case Age if Age < 18:
                 print("You are under 18 years old.")
@@ -37,7 +39,12 @@ def Profil(file, file2, Matrix):
                 Age = 3
         readers.write(str(Age) + ",")
         Style = int(input(
-            "Enter 1 if you like Science Fiction,\nEnter 2 if you like Biography,\nEnter 3 if you like Horror,\nEnter 4 if you like Romance,\nEnter 5 if you like Fables,\nEnter 6 if you like History,\nEnter 7 if you like Comedy:"))
+            "Enter 1 if you like Science Fiction,\nEnter 2 if you like Biography,\nEnter 3 if you like Horror,\nEnter 4 if you like Romance,\nEnter 5 if you like Fables,\nEnter 6 if you like History,\nEnter 7 if you like Comedy:")
+        )
+        while Style > 7 or Style < 0:
+            Style = int(input(
+                "Enter 1 if you like Science Fiction,\nEnter 2 if you like Biography,\nEnter 3 if you like Horror,\nEnter 4 if you like Romance,\nEnter 5 if you like Fables,\nEnter 6 if you like History,\nEnter 7 if you like Comedy:")
+            )
         readers.write(str(Style) + "\n")
 
 
@@ -121,7 +128,6 @@ def users_exist(file, name):
         line = f.readline()
 
         while line != "":
-            print("name =", name, "line", line)
             if name in line:
                 return True
             else:

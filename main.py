@@ -10,17 +10,14 @@ Matrix = fm.Matrix
 
 # on demande si il veut se creer un profil, se connecter, rechercher un utilisateur ou quitter
 Interface = int(
-    input("Que voulez-vous faire ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n "
-          "3 pour rechercher un utilisateur;\n 4 pour saisir les livres que vous avez lus;\n 5 pour ajouter une note "
-          "à un livre;\n 6 pour supprimer votre compte;\n 7 pour vérifier que le compte existe;\n 8 pour quitter : ")
+    input("Would you like to log in? \n 1 to create a profile;\n 2 to continue to the connection;\n 3 to search for a user;\n 4 to enter the books you have read;"
+              " \n 5 to add a grade to a book;\n 6 to delete your account;\n7 to verify that the account exists;\n 8 to quit: \n 9 to cancel :")
 )
 
 while Interface > 6 or Interface < 1:
     Interface = int(
-        input("voulez vous vous connectez ? \n 1 pour créer un profil;\n 2 pour poursuivre a la connection;\n 3 pour "
-              "rechercher un utilisateur;\n 4 pour saisir les livres que vous avez lus; "
-              "\n 5 pour ajouter une note à un livre;\n 6 pour supprimer votre compte;\n 7 pour vérifier que le "
-              "compte existe;\n 8 pour quitter : \n 9 pour déco :")
+        input("Would you like to log in? \n 1 to create a profile;\n 2 to continue to the connection;\n 3 to search for a user;\n 4 to enter the books you have read;"
+              " \n 5 to add a grade to a book;\n 6 to delete your account;\n7 to verify that the account exists;\n 8 to quit: \n 9 to cancel :")
     )
 # initialise the pseudo as an empty str
 pseudo = ""
@@ -33,8 +30,8 @@ while Interface > 0 or Interface < 10:
             print(Matrix)
             fm.save_matrix("Matrix.txt", Matrix)
         case 2:
-            pseudo = str(input("veuillez rentrer votre Speudo : "))
-            pseudo = Connection("readers.txt")
+            pseudo = str(input("Please enter your pseudo : "))
+            pseudo = Connection("readers.txt", name)
 
         case 3:
             namelook = str(input("veuillez rentrer le pseudo de la personne que vous cherchez : "))
@@ -56,7 +53,6 @@ while Interface > 0 or Interface < 10:
                     # exit("Action cancelled")
         case 7:
             print(users_exist("readers.txt", name))
-            # exit()
         case 8:
             exit()
         case 9:
