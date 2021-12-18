@@ -16,7 +16,7 @@ def Profil(file, file2, Matrix):
                 Pseudo = str(input("Enter your name (only letter and capital letter): "))
             readers.write(Pseudo + ",")
             br.write(Pseudo + " ,\n")
-            temp_list = [i - i for i in range(len(Matrix[0]))]
+            temp_list = [i - i for i in range(len(Matrix[0])-1)]
             temp_list[0] = Pseudo
             Matrix.append(temp_list)
             fm.save_matrix("matrix.txt", Matrix)

@@ -120,7 +120,7 @@ def delete_Book(file: str, file2: str, file3: str):
     name = str(input("Enter the title of the book to delete :"))
     position = book_exist(file, name)
     if position is None:
-        return print(f"{name} isn't in the database")
+        return print(f"{name} isn't in the database.")
     # list of file data
     data_list = []
 
@@ -188,20 +188,16 @@ def booksread_verify(file1, file2, reader, title):
         return f": {title} doesn't exist, add it before."
     else:
         position = test
-    print("test =", test, title)
     # open file in read mode
     with open(file2, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
-        print(content)
         for line in content:
             l2 = line.strip(',\n').strip('').split(',')
             # verify if the book is already written
-            print(l2[0], " == ", reader)
             if l2[0].strip(' ') == reader:
                 # if found, stop the process with return function, from the second elt in list
                 for elt in l2[1:]:
-                    print(elt, "==",position)
                     if int(elt) == int(position):
                         return True, position
         return False, 0
@@ -213,7 +209,7 @@ def booksread_addBook(file, file1, file2, reader):
     file1: books
     file2: booksread
     reader, the currently logged user"""
-    title = str(input("What is the title of the book you are looking for ?"))
+    title = str(input("What is the title of the book you are looking for ? :"))
     # verify is the user is connected
     if not users_exist(file, reader):
         return print("Please connect with a valid username")
@@ -225,31 +221,29 @@ def booksread_addBook(file, file1, file2, reader):
         return f"{title}, doesn't exist, add it before."
     else:
         position = test
-        print("position =", position)
     verification = False
     # copy the data in the file before the changes
     data_list = []
-    # open file in read mode
-    with open(file2, "r", encoding='utf-8') as f:
-        # read open file
-        content = f.readlines()
-        for line in content:
-            l2 = line.strip('\n').split(' ,')
-            # verify if the book isn't already written
-            if l2[0] == reader:
-                verification = True
-                # if one is ever found, stop the process with return function
-                for elt in l2:
-                    elt2 = str(elt.strip(" "))
-                    if str(elt2) == str(position):
-                        return print("This book has already been added.")
-                # if not written, add position related to the book at the end of the line, and separated byt a coma
-                l3 = line.strip(',\n')
-                l3 = l3 + "," + str(position) + '\n'
-                print(l3)
-                data_list.append(l3)
-            else:
-                data_list.append(line)
+    # test if the reader has already added the book in the booksread file
+    test_presence = booksread_verify(file1, file2, reader, title)
+    if test_presence[0] is True:
+        return print("This book has already been added.")
+    else:
+        # open file in read mode
+        with open(file2, "r", encoding='utf-8') as f:
+            # read open file
+            content = f.readlines()
+            for line in content:
+                l2 = line.strip('\n').split(' ,')
+                # search for the reader line
+                if l2[0] == reader:
+                    verification = True
+                    # if not written, add position related to the book at the end of the line, and separated by a coma
+                    l3 = line.strip(',\n')
+                    l3 = l3 + "," + str(position) + '\n'
+                    data_list.append(l3)
+                else:
+                    data_list.append(line)
 
     # 2nd open of the file to rewrite data with correct list of read books
     with open(file2, "w", encoding='utf-8') as f:

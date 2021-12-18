@@ -1,7 +1,2 @@
-
-lucas ,
-k ,
-loli ,
-pot ,
-poala ,
-ooo ,
+syl ,8,4
+chapel ,8

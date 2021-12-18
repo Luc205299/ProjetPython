@@ -7,7 +7,7 @@ def init_Matrix(file1, file2, file3=None):
     """create a matrix with books as columns, persons as rows
     file1: books.txt
     file2: matrix.txt
-    file3: readers.txt optionnal"""
+    file3: readers.txt optionnal, to create the matrix straight from the reader file """
     global Matrix
     # append the book line as the line[0] in the matrix
     if not is_empty(file2):
@@ -25,7 +25,7 @@ def init_Matrix(file1, file2, file3=None):
             Matrix.append(tmp)
         save_matrix(file2, Matrix)
         # import each line to init from readers in case of many readers but 0 notes
-        if file3 != None:
+        if file3 is not None:
             with open(file3, "r", encoding='utf-8') as f:
                 # for each reader in the folder
                 line = f.readlines()
@@ -39,44 +39,40 @@ def init_Matrix(file1, file2, file3=None):
                 for elt in tmp_final:
                     Matrix.append(elt)
 
+
 def update_Matrix(file1, file2, reader, book=None) -> list:
     """update the matrix with note of the reader
     file1: books.txt
     file2: booksread.txt
     reader: the logged user"""
     # global Matrix
-    Matrix = import_matrix("matrix.txt")
+    matrix = import_matrix("matrix.txt")
     # Matrix = matrix
-    if book == None:
+    if book is None:
         book = str(input(" What is the title of the book you want to rate :"))
     # if the book exist and has already been read
-    print("reader", reader)
+    if not book_exist(file1, book):
+        return print(f" {book} doesn't exist, try to add it before.")
     test = booksread_verify(file1, file2, reader, book)
     if test[0] is True:
         position = test[1]
         note = 10
         while note <= 0 or note > 5:
             note = int(input("Enter your grade, from 1 star to 5 : "))
-
     elif test[0] == False:
         return print("Please, be aware that you need to read the book before.", test)
     else:
         return print(test)
     cpt = 0
     # first elt of each column is a reader, the first line books
-    while Matrix[cpt][0] != reader or Matrix[cpt][0] is None:
-        # match format
-        print(f"tentative {cpt}, user = {reader} =  {Matrix[cpt][0]} donc {Matrix[cpt][0] == reader}")
+    while matrix[cpt][0] != reader or matrix[cpt][0] is None:
+        # match the right line
         cpt += 1
     # update matrix in related position
-    Matrix[cpt][position] = note
-    # verification of the good changes
-    print("Matrice:")
-    for line in Matrix:
-        print(line)
-    # met a jour la matrice avec la nouvelle note
-    save_matrix("Matrix.txt", Matrix)
-    return Matrix
+    matrix[cpt][position] = note
+    # update the matrix
+    save_matrix("Matrix.txt", matrix)
+    return matrix
 
 
 def save_matrix(file, Matrix):
