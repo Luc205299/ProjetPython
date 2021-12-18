@@ -84,6 +84,7 @@ def DisplayUsers(file, file2, name):
                         verification = True
                     else:
                         line = readers.readline()
+                return print("user not found")
             while verification2 == False:
                 line2 = br.readline()
                 while line2 != "" and verification2 == False:
@@ -91,7 +92,8 @@ def DisplayUsers(file, file2, name):
                         verification2 = True
                     else:
                         line2 = br.readline()
-    return print("readersd : ", line, "booksread : ", line2)
+            return print("user not found")
+    return print("readers : ", line, "booksread : ", line2)
 
 
 def DeleteUsers(file, file2, name):
