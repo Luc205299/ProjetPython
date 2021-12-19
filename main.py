@@ -38,7 +38,7 @@ pseudo = ""
 while Interface > 1 or Interface < 5:
     match Interface:
         case 1:
-            Profil("readers.txt", "booksread.txt", Matrix)
+            Profile("readers.txt", "booksread.txt", Matrix)
 
         case 2:
             user_interface = 1

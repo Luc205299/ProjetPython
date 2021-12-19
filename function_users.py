@@ -10,11 +10,12 @@ from function_matrix import *
 import function_matrix as fm
 
 
-def Profil(file, file2, Matrix):
-    """Function to create user profile with name, gender, age, and style liked by the user
+def Profile(file, file2, Matrix):
+    """Function to create user profile with name, gender, age, and style liked by the user and add the profile in readers.txt and the username in booksread.txt
     file : readers.txt
     file2 : booksread.txt
     Matrix : Matrix
+    :return : nothing,
     """
     with open(file, "a") as readers:
         with open(file2, "a") as br:
@@ -63,6 +64,7 @@ def Connection(file, name):
     """ enable the user to connect to his account
     file : "readers.txt"
     name : name of the user
+    :return : return the username of the user
     """
     with open(file, "r") as readers:
         line = readers.readlines()
@@ -79,6 +81,8 @@ def DisplayUsers(file, file2, name):
     file : readers.txt
     file 2 : booksred.txt
     name : name of the user
+    :return : if the user exist, it's return the profile of the user with his age,gender,etc... and the profile of the user in booksread.txt
+               if the user is not found, it's return 'user not found'
     """
     with open(file, "r") as readers:
         with open(file2, "r") as br:
