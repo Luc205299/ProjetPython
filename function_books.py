@@ -16,15 +16,13 @@ from function_users import *
 def is_empty(file:str) -> bool:
     """return true if a file is empty
     file : the file to check
-    :return bool
-    """
+    :return bool"""
     # open file in read mode
     with open(file, "r", encoding='utf-8') as f:
         content = f.readlines()
         # if file is empty, return True
         if len(content) == 0:
             return True
-    # else return false
     return False
 
 
