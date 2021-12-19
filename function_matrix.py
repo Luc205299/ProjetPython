@@ -59,8 +59,9 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
         note = 10
         while note <= 0 or note > 5:
             note = int(input("Enter your grade, from 1 star to 5 : "))
+            print(f"You gave {note} stars to the book : '{book}'.")
     elif test[0] == False:
-        return print("Please, be aware that you need to read the book before.", test)
+        return print("Please, be aware that you need to read the book before.")
     else:
         return print(test)
     cpt = 0
@@ -69,7 +70,7 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
         # match the right line
         cpt += 1
     # update matrix in related position
-    matrix[cpt][position] = note
+    matrix[cpt][position+1] = note
     # update the matrix
     save_matrix("Matrix.txt", matrix)
     return matrix

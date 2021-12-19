@@ -1,3 +1,2 @@
-syl  ,8  ,4
-chapel  ,8
-sisu 
+su ,7
+yu ,7

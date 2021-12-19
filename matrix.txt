@@ -1,2 +1,3 @@
-0,Débuter la programmation Java,Apprendre Python,Les Citations du Président Mao Tse-Toung,Don Quichotte de la Manche,Un conte de deux villes,Le Seigneur des Anneaux,Le Petit Prince,Harry Potter à l’école des sorciers,Le Hobbit,Dix Petits Nègres,Le rêve dans le Pavillon rouge,Le Lion, la Sorcière blanche et l’Armoire magique,Elle – She : a history of Adventure,The Da Vinci Code,
-sisu,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,The Bloody Chamber,The Memoirs of an Amnesiac,The Silence of the Lambs,The Hunger,Wild Eyes,White Teeth,The Resisters,The Power,
+su,0,0,0,0,0,0,0,0,
+yu,0,0,0,0,0,0,0,0,

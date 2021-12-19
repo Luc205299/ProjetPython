@@ -45,7 +45,7 @@ def book_exist(file1, name):
             line2 = line.strip('\n')
             if line2 == name:
                 return True, content.index(line)
-    return False, 0
+    return False, -1
 
 
 def addBook(file: str, file2: str, name: str = None):
@@ -113,21 +113,17 @@ def delete_Book(file: str, file2: str, file3: str):
     # if the book exist
     matrix = fm.import_matrix(file3)
     name = str(input("Enter the title of the book to delete :"))
-    position = book_exist(file, name)[1]
-    print("position", position)
+    position = book_exist(file, name)[1]+1
     if position == 0:
         return print(f"{name} isn't in the database.")
     # list of file data
     data_list = []
-    # delete the line linked to the book index in the matrix
-    for n, elt in enumerate(matrix):
-        print(n, elt)
-    # delete the title on first line
-    test = matrix[0].pop(position)
-    # delete occurences in each line
+    # delete occurrences in each line
     for i in range(1, len(matrix)):
         matrix[i].pop(position)
-    print(test)
+    # delete the title on first line
+    print("position =", position)
+    test = matrix[0].pop(position)
     fm.save_matrix(file3, matrix)
 
     # delete occurrences in booksread
@@ -135,17 +131,14 @@ def delete_Book(file: str, file2: str, file3: str):
         # read open file to search the book occurrences
         content = f2.readlines()
         for elt in content:
-
-            tmp = elt.strip(',\n').split(',')
-            print("tmp =",tmp)
+            tmp = elt.strip(',\n').strip(' ').split(',')
+            print("tmp =", tmp)
             for elt2 in tmp[1:]:
-                # rewrite every value of books minus one, to fill the hole let by the deleted book
-                if int(elt2) > position:
-                    # print("elt2 :", elt2, type(elt2))
-
+                print("int& elt2 =",elt2,position)
+                if int(elt2)+1 > position:
+                    # rewrite every value of books minus one, to fill the hole let by the deleted book
                     tmp[tmp.index(elt2)] = str(int(elt2) - 1)
-
-                elif int(elt2) == position:
+                elif int(elt2)+1 == position:
                     tmp.pop(tmp.index(elt2))
             # rewrite every element in the line separated by a coma
             data_list.append(tmp)
@@ -156,10 +149,9 @@ def delete_Book(file: str, file2: str, file3: str):
         for elt in data_list:
             for elt2 in elt:
                 if elt.index(elt2) == 0:
-
                     f.write(elt2)
                 else:
-                    f.write(" ," + elt2)
+                    f.write("," + elt2)
             f.write('\n')
 
     # delete in books.txt
@@ -195,12 +187,14 @@ def booksread_verify(file1, file2, reader, title) -> tuple:
     with open(file2, "r", encoding='utf-8') as f:
         # read open file
         content = f.readlines()
+        # check for the reader line
         for line in content:
-            l2 = line.strip(',\n').strip('').split(',')
+            l2 = line.strip(',\n').strip(' ').split(',')
             # verify if the book is already written
             if l2[0].strip(' ') == reader:
                 # if found, stop the process with return function, from the second elt in list
                 for elt in l2[1:]:
+                    print("elt & position =",elt,position)
                     if int(elt) == int(position):
                         return True, position
         return False, 0
@@ -220,10 +214,10 @@ def booksread_addBook(file, file1, file2, reader):
     if title is None:
         title = str(input("Which book did you read ? :"))
     test = book_exist(file1, title)
-    if test is None:
+    if test[0] is False:
         return f"{title}, doesn't exist, add it before."
     else:
-        position = test
+        position = test[1]
     verification = False
     # copy the data in the file before the changes
     data_list = []
@@ -239,7 +233,7 @@ def booksread_addBook(file, file1, file2, reader):
             for line in content:
                 l2 = line.strip('\n').split(' ,')
                 # search for the reader line
-                if l2[0] == reader:
+                if l2[0].strip(' ') == reader:
                     verification = True
                     # if not written, add position related to the book at the end of the line, and separated by a coma
                     l3 = line.strip(',\n')
