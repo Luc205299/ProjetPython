@@ -52,7 +52,8 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
     """update the matrix with note of the reader
     file1: books.txt
     file2: booksread.txt
-    reader: the logged user"""
+    reader: the logged user
+    :return the matrix updated"""
     # global Matrix
     matrix = import_matrix("matrix.txt")
     # Matrix = matrix
@@ -78,42 +79,48 @@ def update_Matrix(file1, file2, reader, book=None) -> list:
         # match the right line
         cpt += 1
     # update matrix in related position
-    matrix[cpt][position+1] = note
+    matrix[cpt][position + 1] = note
     # update the matrix
     save_matrix("Matrix.txt", matrix)
     return matrix
 
 
-def save_matrix(file, Matrix):
+def save_matrix(file: str, matrix):
+    """file:str the file of the matrix
+    matrix : the matrix u want to save in the file
+    :return nothing; the matrix is directly send in the file"""
     # global Matrix
     with open(file, "w", encoding='utf-8') as f:
         # print("Matrix",len(Matrix), '\n',Matrix)
-        for i in range(len(Matrix)):
+        for i in range(len(matrix)):
 
             # print("i =",i)
-            for j in range(len(Matrix[i])):
+            for j in range(len(matrix[i])):
                 # print("j =",j)
-                f.write(str(Matrix[i][j]) + ",")
+                f.write(str(matrix[i][j]) + ",")
             f.write("\n")
 
 
-def import_matrix(file):
+def import_matrix(file: str) -> list:
+    """create a matrix as a variable python list from a txt file
+    file: the file of the matrix
+    :return the matrix"""
     n = []
     with open(file, "r", encoding='utf-8') as f:
         line = f.readlines()
         # read the file
         for i in range(len(line)):
-            L = []
+            list_tmp = []
             if i == 0:
                 tmp = line[i].strip(',\n').split(",")
-                L = tmp
+                list_tmp = tmp
             else:
                 a = line[i].strip(',\n').split(",")
                 for j in range(len(a)):
                     if j == 0:
-                        L.append(a[0])
+                        list_tmp.append(a[0])
                     else:
                         a = line[i].strip('\n').split(",")
-                        L.append(a[j])
-            n.append(L)
+                        list_tmp.append(a[j])
+            n.append(list_tmp)
     return n

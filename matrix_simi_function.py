@@ -15,10 +15,11 @@ from function_users import *
 Matrix_simi = []
 
 
-def init_matrixSimi(file, file2):
-    """init the matrix used to show the percentage of compatibility and sameness between each and every reader
-    file : matrix_simi.txt
-    file 2: matrix"""
+def init_matrixSimi(file:str, file2:str):
+    """init the matrix used to show the percentage of compatibility between each and every reader
+    :param  matrix_simi.txt
+    :param file 2: matrix
+    :return nothing, the matrix ius directly saved in the file1"""
     global Matrix_simi
     matrix1 = import_matrix(file2)
     if len(matrix1) < 1:
@@ -62,18 +63,18 @@ def init_matrixSimi(file, file2):
                         num += a[m] * b[m]
                     denom = sqrt(sum1) * sqrt(sum2)
                     Matrix_simi[i][j] = round(num / denom, 2)
-    print(elt for elt in Matrix_simi)
     # save the matrix in the linked file
     save_matrix(file, Matrix_simi)
 
 
-def book_suggestion(file1, file2, file3, file4, name: str):
+def book_suggestion(file1:str, file2:str, file3:str, file4:str, name: str):
     """suggest a book nased on the matrix_simi
     -file1 : readers.txt
     -file2 : Matrice_similarité.txt
     -file3 : booksread.txt
     -file4 : books.txt
-    -name : name of the user"""
+    -name : name of the user
+    return : str depedning on the case"""
     # test if the user is connected with an existing pseudo
     if not users_exist(file1, name):
         return print("Please, register before making this query.")
@@ -105,7 +106,7 @@ def book_suggestion(file1, file2, file3, file4, name: str):
                 linebksr_sibling = elements
             elif elements[0].strip(" ") == name:
                 linebksr_user = elements
-        # add every book that hasn't been readen yet by their index
+        # add every book that hasn't been read yet by their index
         for elt in linebksr_sibling[1:]:
             if elt not in linebksr_user[1:]:
                 line_number.append(int(elt))
@@ -120,15 +121,15 @@ def book_suggestion(file1, file2, file3, file4, name: str):
             print("Here's our personal suggestions : ")
             print(*line_bks)
     # input the concerned book
-    chc = str(input("Pick one up : "))
-    while chc not in line_bks:
-        chc = str(input("Please, pick one that u see in the following line :"))
+    choice = str(input("Pick one up : "))
+    while choice not in line_bks:
+        choice = str(input("Please, pick one that u see in the following line :"))
         print(line_bks)
     # after the user chose a new among suggestions books
-    booksread_addBook(file1, file4, file3, name, chc)
+    booksread_addBook(file1, file4, file3, name, choice)
     answer = str(input("Do you want to rate it ? ( y / n ):"))
     if answer == "y":
-        fm.update_Matrix(file4, file3, name, chc)
+        fm.update_Matrix(file4, file3, name, choice)
     else:
         # reminder to note the book
-        return print(f"Do not forget to rate {chc} after you finished !")
+        return print(f"Do not forget to rate {choice} after you finished !")

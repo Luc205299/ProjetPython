@@ -13,8 +13,11 @@ from math import *
 from function_users import *
 
 
-def is_empty(file) -> bool:
-    """return true if a file is empty"""
+def is_empty(file:str) -> bool:
+    """return true if a file is empty
+    file : the file to check
+    :return bool
+    """
     # open file in read mode
     with open(file, "r", encoding='utf-8') as f:
         content = f.readlines()
@@ -28,8 +31,8 @@ def is_empty(file) -> bool:
 def ShowBook(file: str):
     """function to open and read the Books file and print what's inside
     file: the file un want to read (.txt)
-    listing: list of books to show, and not the others"""
-
+    listing: list of books to show, and not the others
+    :return nothing, it us a display function"""
     # open file in read mode
     with open(file, "r", encoding='utf-8') as f:
         # read open file
@@ -40,11 +43,11 @@ def ShowBook(file: str):
         print(count, ":", content)
 
 
-def book_exist(file1, name):
+def book_exist(file1, name) -> tuple:
     """function to search if a book exist and return it number if it is true
     file: books (.txt)
-    name: name of the book"""
-
+    name: name of the book
+    :return tuple ( bool, int ) """
     # open file in read mode
     with open(file1, "r", encoding='utf-8') as f:
         # read open file
@@ -60,7 +63,8 @@ def addBook(file: str, file2: str, name: str = None):
     """function to add a book at the end of the file
     file: book (.txt)
     file2: matrix.txt
-    name: the name of the book you want to append"""
+    name: the name of the book you want to append
+    :return nothing, write in the file"""
     if name is None:
         name = str(input("What is the title of the book : "))
     exist = book_exist(file, name)
@@ -83,7 +87,8 @@ def addBook(file: str, file2: str, name: str = None):
 def changeTitle(file: str):
     """function to modify an existing book in file
     file: the file un want to read (.txt)
-    name: the name of the book you want to modify"""
+    name: the name of the book you want to modify
+    :return nothing, this is an update function"""
 
     name = str(input("What is the title of the book you want to modify ? :"))
     index_src = None
@@ -117,7 +122,8 @@ def delete_Book(file: str, file2: str, file3: str):
     """ delete an existing book from the repository/library of file in argument
     file : books.txt
     file2: booksread
-    file3 : matrix.txt"""
+    file3 : matrix.txt
+    :return nothing, this is an update function"""
     # if the book exist
     matrix = fm.import_matrix(file3)
     name = str(input("Enter the title of the book to delete :"))
@@ -170,18 +176,20 @@ def delete_Book(file: str, file2: str, file3: str):
                 data_list.append(l2)
             else:
                 index_src = content.index(line)
-                # 2nd open of the file to rewrite data with correct list of read books
+                #rewrite data with correct list of read books
     with open(file, "w", encoding='utf-8') as f:
         # write new data in opened file
         for elt in data_list:
             f.write(elt + '\n')
     print(f"{name} has been deleted.")
 
+
 def booksread_verify(file1, file2, reader, title) -> tuple:
     """verify is a book as been read by the reader
        file1: books
        file2: booksread
-       reader, the currently logged user"""
+       reader, the currently logged user
+       :return tuple( bool, int ) """
     # check if the title exist
     test = book_exist(file1, title)
     if test[0] is False:
@@ -210,7 +218,8 @@ def booksread_addBook(file, file1, file2, reader, title=None):
     file1: books
     file2: booksread
     reader, the currently logged user
-    title: the title of the book"""
+    title: the title of the book
+    :return nothing, this is an update function"""
     # verify is the user is connected
     if not users_exist(file, reader):
         return print("Please connect with a valid username")
