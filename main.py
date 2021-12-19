@@ -39,7 +39,7 @@ pseudo = ""
 while global_interface > 1 or global_interface < 5:
     match global_interface:
         case 1:
-            Profil("readers.txt", "booksread.txt", Matrix)
+            Profile("readers.txt", "booksread.txt", Matrix)
 
         case 2:
             user_interface = 1
