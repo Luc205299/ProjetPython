@@ -1,4 +1,6 @@
-Bonjour, bienvenue.
+Bonjour, bienvenue. Ce programme à été écrit par Lucas Barthelemy et Sylvan Buhard
+
+Python Version: 3.10
 
 le projet contient les fichiers suivants:
 pour exécuter le programme, simplement lancer main.py, et interagir avec les autrs fichiers grâce à la console.

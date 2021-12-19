@@ -1,4 +1,4 @@
-0,sylvan,luK,Yoo,
-sylvan,1,0,0,
-luK,0,1,0,
-Yoo,0,0,1,
+0,sylvan,luK,lambda,
+sylvan,1,0.62,0,
+luK,0.62,1,0,
+lambda,0,0,1,

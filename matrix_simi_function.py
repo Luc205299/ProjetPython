@@ -12,15 +12,13 @@ from function_books import *
 from math import *
 from function_users import *
 
-Matrix_simi = []
-
 
 def init_matrixSimi(file:str, file2:str):
     """init the matrix used to show the percentage of compatibility between each and every reader
-    :param  matrix_simi.txt
-    :param file 2: matrix
+    :param  file 1:matrix_simi.txt
+    :param file 2: matrix.txt
     :return nothing, the matrix ius directly saved in the file1"""
-    global Matrix_simi
+    Matrix_simi=[]
     matrix1 = import_matrix(file2)
     if len(matrix1) < 1:
         return print("Not enough profiles on the app to get a suggestion.")
@@ -53,7 +51,7 @@ def init_matrixSimi(file:str, file2:str):
                 for k in range(1, len(a)):
                     sum1 += a[k] ** 2
                     sum2 += b[k] ** 2
-                # if one sum is equal to 0, compatibility will be 0
+                # if one sum is equal to 0, compatibility will be 0, avoid zero division error
                 if sum1 == 0 or sum2 == 0:
                     Matrix_simi[i][j] = 0
                 else:
@@ -109,7 +107,8 @@ def book_suggestion(file1:str, file2:str, file3:str, file4:str, name: str):
         # add every book that hasn't been read yet by their index
         for elt in linebksr_sibling[1:]:
             if elt not in linebksr_user[1:]:
-                line_number.append(int(elt))
+                if elt != '':
+                    line_number.append(int(elt))
         # go through every book to add it
         with open(file4, "r", encoding='utf-8') as bks:
             # transform every book index into the title
@@ -118,10 +117,11 @@ def book_suggestion(file1:str, file2:str, file3:str, file4:str, name: str):
         if len(line_bks) == 0:
             return print("Sadly, no recommendations are possible, your have read every book we could have suggested.")
         else:
-            print("Here's our personal suggestions : ")
-            print(*line_bks)
+            print("Here's our personal suggestions : \n")
+            for elt in line_bks:
+                print(f"- {elt}")
     # input the concerned book
-    choice = str(input("Pick one up : "))
+    choice = str(input("Choose one : "))
     while choice not in line_bks:
         choice = str(input("Please, pick one that u see in the following line :"))
         print(line_bks)

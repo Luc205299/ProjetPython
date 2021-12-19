@@ -1,3 +1,3 @@
-sylvan ,0,8
-luK ,0,8
-Yoo ,
+sylvan ,9,5,2
+luK ,9
+lambda ,

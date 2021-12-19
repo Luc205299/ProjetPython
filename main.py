@@ -16,27 +16,28 @@ from matrix_simi_function import *
 # init the grade matrix
 fm.init_Matrix("books.txt", "matrix.txt", "readers.txt")
 Matrix = fm.Matrix
+print("Welcome to the application.\n")
 text_interface = "\nWhat would you like to do ? \n 1 to create a profile;\n 2 to continue to the connection;\n 3 to " \
                  "search " \
-                 "an user;\n 4 if you are an administrator;\n 5 to quit ; \n :"
+                 "an user;\n 4 if you are an administrator;\n 5 to quit ; \n -> :"
 
 text_Userinterface = "\nWhat would you like to do ? \n 1 to enter the books you have read; \n 2 to rate a book;\n 3 to delete your " \
                      "account;\n 4 to get a book " \
                      "suggestion; \n 5 to see every book available ;\n 6 to search a specific book ;\n 7 to add a " \
-                     "book to our database ;\n 8 to check if you already read a specific book ; \n 9 to log out :"
+                     "book to our database ;\n 8 to check if you already read a specific book ; \n 9 to log out \n -> : "
 text_Admininterface = "\nWhat would you like to do ? \n 1 to verify that the account exists;\n 2 to change the title of a book;\n 3 to delete a book from the database " \
-                      ";\n 4 to log out ; \n :"
+                      ";\n 4 to log out ; \n -> :"
 # menu for the user, making him able to interact with the program
-Interface = 5
+global_interface = 5
 
-while Interface < 0 or Interface > 4 or Interface is None:
-    Interface = int(
+while global_interface < 0 or global_interface > 4 or global_interface is None:
+    global_interface = int(
         input(text_interface))
 
 # initialise the pseudo as an empty str
 pseudo = ""
-while Interface > 1 or Interface < 5:
-    match Interface:
+while global_interface > 1 or global_interface < 5:
+    match global_interface:
         case 1:
             Profil("readers.txt", "booksread.txt", Matrix)
 
@@ -124,6 +125,6 @@ while Interface > 1 or Interface < 5:
             exit()
         case _:
             print("Invalid command")
-    Interface = int(
+    global_interface = int(
         input(text_interface))
 

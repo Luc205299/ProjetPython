@@ -1,4 +1,4 @@
 0,Long Walk to Freedom,Things I Did and Things I Think I Did,The Bloody Chamber,The Memoirs of an Amnesiac,The Silence of the Lambs,The Hunger,Wild Eyes,White Teeth,The Resisters,The Power,
-sylvan,0,0,0,0,0,0,0,0,0,0,
-luK,4,0,0,0,0,0,0,0,5,0,
-Yoo,0,0,0,0,0,0,0,0,0,0,
+sylvan,0,0,5,0,0,4,0,0,0,5,
+luK,0,0,0,0,0,0,0,0,0,4,
+lambda,0,0,0,0,0,0,0,0,0,0,
