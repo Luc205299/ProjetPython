@@ -1,3 +1,11 @@
+""" Book recommandation project, programming in python
+
+    Sylvan Buhard
+    Lucas Barthelemy
+    function_books.py: gathers each function linked to the library and books management,
+     and associated features."""
+
+# importations needed
 from function_matrix import *
 import function_matrix as fm
 from function_books import *
@@ -6,7 +14,7 @@ from function_users import *
 
 
 def is_empty(file) -> bool:
-    """return true if a folder is empty"""
+    """return true if a file is empty"""
     # open file in read mode
     with open(file, "r", encoding='utf-8') as f:
         content = f.readlines()

@@ -1,3 +1,11 @@
+""" Book recommandation project, programming in python
+
+    Sylvan Buhard
+    Lucas Barthelemy
+    matrix_simi.py: create and use the matrix that calculate the similarity between two profile
+     and use it to suggest a book"""
+
+# importations needed
 from function_matrix import *
 import function_matrix as fm
 from function_books import *

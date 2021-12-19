@@ -1,3 +1,11 @@
+""" Book recommandation project, programming in python
+
+    Sylvan Buhard
+    Lucas Barthelemy
+    function_users.py: gathers each function linked to the user profile management
+     and associated features."""
+
+# importations needed
 from function_matrix import *
 import function_matrix as fm
 

@@ -1,3 +1,11 @@
+""" Book recommandation project, programming in python
+
+    Sylvan Buhard
+    Lucas Barthelemy
+    function_matrix.py: gathers each function linked to the matrix that create the link between user, books and their
+     notes and associated features."""
+
+# importations needed
 from function_books import *
 
 Matrix = []

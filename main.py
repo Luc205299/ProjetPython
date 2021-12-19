@@ -1,5 +1,11 @@
-from unittest import case
+""" Book recommandation project, programming in python
 
+    Sylvan Buhard
+    Lucas Barthelemy
+    main.py: links every feature present in each module to run the programm"""
+
+# importations needed for the programm
+from unittest import case
 from function_matrix import *
 import function_matrix as fm
 from function_books import *
@@ -10,15 +16,15 @@ from matrix_simi_function import *
 # init the grade matrix
 fm.init_Matrix("books.txt", "matrix.txt", "readers.txt")
 Matrix = fm.Matrix
-text_interface = "What would you like to do ? \n 1 to create a profile;\n 2 to continue to the connection;\n 3 to " \
+text_interface = "\nWhat would you like to do ? \n 1 to create a profile;\n 2 to continue to the connection;\n 3 to " \
                  "search " \
                  "an user;\n 4 if you are an administrator;\n 5 to quit ; \n :"
 
-text_Userinterface = "What would you like to do ? \n 1 to enter the books you have read; \n 2 to rate a book;\n 3 to delete your " \
+text_Userinterface = "\nWhat would you like to do ? \n 1 to enter the books you have read; \n 2 to rate a book;\n 3 to delete your " \
                      "account;\n 4 to get a book " \
                      "suggestion; \n 5 to see every book available ;\n 6 to search a specific book ;\n 7 to add a " \
                      "book to our database ;\n 8 to check if you already read a specific book ; \n 9 to log out :"
-text_Admininterface = "What would you like to do ? \n 1 to verify that the account exists;\n 2 to change the title of a book;\n 3 to delete a book from the database " \
+text_Admininterface = "\nWhat would you like to do ? \n 1 to verify that the account exists;\n 2 to change the title of a book;\n 3 to delete a book from the database " \
                       ";\n 4 to log out ; \n :"
 # menu for the user, making him able to interact with the program
 Interface = 5
