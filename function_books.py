@@ -122,7 +122,6 @@ def delete_Book(file: str, file2: str, file3: str):
     for i in range(1, len(matrix)):
         matrix[i].pop(position)
     # delete the title on first line
-    print("position =", position)
     test = matrix[0].pop(position)
     fm.save_matrix(file3, matrix)
 
@@ -132,9 +131,7 @@ def delete_Book(file: str, file2: str, file3: str):
         content = f2.readlines()
         for elt in content:
             tmp = elt.strip(',\n').strip(' ').split(',')
-            print("tmp =", tmp)
             for elt2 in tmp[1:]:
-                print("int& elt2 =",elt2,position)
                 if int(elt2)+1 > position:
                     # rewrite every value of books minus one, to fill the hole let by the deleted book
                     tmp[tmp.index(elt2)] = str(int(elt2) - 1)
@@ -194,19 +191,18 @@ def booksread_verify(file1, file2, reader, title) -> tuple:
             if l2[0].strip(' ') == reader:
                 # if found, stop the process with return function, from the second elt in list
                 for elt in l2[1:]:
-                    print("elt & position =",elt,position)
                     if int(elt) == int(position):
                         return True, position
         return False, 0
 
 
-def booksread_addBook(file, file1, file2, reader):
+def booksread_addBook(file, file1, file2, reader, title=None):
     """update the folder with each reader and the books he has read
     file: readers
     file1: books
     file2: booksread
-    reader, the currently logged user"""
-    title = str(input("What is the title of the book you are looking for ? :"))
+    reader, the currently logged user
+    title: the title of the book"""
     # verify is the user is connected
     if not users_exist(file, reader):
         return print("Please connect with a valid username")

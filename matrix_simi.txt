@@ -1,3 +1,4 @@
-0,syl,chapel,
-syl,1,0.78,
-chapel,0.78,1,
+0,sylvan,luK,Yoo,
+sylvan,1,0,0,
+luK,0,1,0,
+Yoo,0,0,1,

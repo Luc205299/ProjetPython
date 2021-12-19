@@ -54,6 +54,7 @@ def init_matrixSimi(file, file2):
                         num += a[m] * b[m]
                     denom = sqrt(sum1) * sqrt(sum2)
                     Matrix_simi[i][j] = round(num / denom, 2)
+    print(elt for elt in Matrix_simi)
     # save the matrix in the linked file
     save_matrix(file, Matrix_simi)
 
@@ -106,7 +107,7 @@ def book_suggestion(file1, file2, file3, file4, name: str):
             temp = [elt.strip('\n') for elt in bks.readlines()]
             line_bks = [temp[elt] for elt in line_number]
         if len(line_bks) == 0:
-            return print("Sadly, no recommendations are possible, your read the most book.")
+            return print("Sadly, no recommendations are possible, your have read every book we could have suggested.")
         else:
             print("Here's our personal suggestions : ")
             print(*line_bks)
